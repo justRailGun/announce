@@ -120,7 +120,7 @@ body {
   }
 
   .h1-bold {
-    @apply text-[30px] font-bold leading-[42px] tracking-tighter;
+    @apply text-2xl sm:text-[30px] font-bold leading-[42px] tracking-tighter;
   }
 
   .h2-bold {

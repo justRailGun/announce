@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body 
-        className={`${Inter.variable} ${SpaceGrotesk.className} antialiased`}
+        className={`${Inter.variable} ${SpaceGrotesk.className} antialiased no-scrollbar`}
       >
         <ThemeProvider attribute="class"
             defaultTheme="system"
