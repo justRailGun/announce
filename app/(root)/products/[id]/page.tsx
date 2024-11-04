@@ -3,7 +3,6 @@
 // import { useState } from 'react'
 import Image from 'next/image'
 import { Star} from 'lucide-react'
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { PRODUCTS } from '@/constants/product'
@@ -18,11 +17,7 @@ const comments = [
   { id: 3, user: "Charlie", content: "Good, but battery life could be better.", rating: 3 },
 ]
 
-const similarProducts = [
-  { id: 1, name: "Wireless Earbuds", price: 149.99, rating: 4.3, reviews: 95 },
-  { id: 2, name: "Over-Ear Studio Headphones", price: 349.99, rating: 4.7, reviews: 210 },
-  { id: 3, name: "Sports Neckband Earphones", price: 79.99, rating: 4.1, reviews: 62 },
-]
+
 
 function ImageSlider({ images }) {
 
@@ -96,7 +91,7 @@ function ProductDetails({ product }) {
 
 function CommentSection({ comments }) {
   return (
-    <div className="mb-8">
+    <div className="mb-8" >
       <h2 className="text-2xl font-bold mb-4">Customer Reviews</h2>
       {comments.map((comment) => (
         <div key={comment.id} className="mb-4 p-4 bg-gray-100 rounded-lg">
@@ -126,38 +121,7 @@ function CommentSection({ comments }) {
   )
 }
 
-function SimilarProducts({ products }) {
-  return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Similar Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {products.map((product) => (
-          <Card key={product.id} className="overflow-hidden">
-            <CardContent className="p-4">
-              <Image
-                src="/placeholder.svg?height=150&width=200&text=Product"
-                alt={product.name}
-                width={200}
-                height={150}
-                className="w-full h-40 object-cover mb-4 rounded"
-              />
-              <h3 className="font-semibold mb-2">{product.name}</h3>
-              <div className="flex justify-between items-center">
-                <span className="font-bold text-green-600">${product.price.toFixed(2)}</span>
-                <div className="flex items-center">
-                  <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                  <span className="ml-1 text-sm text-gray-600">
-                    {product.rating} ({product.reviews})
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-}
+
 
 export default function ProductPage() {
   return (
@@ -165,7 +129,6 @@ export default function ProductPage() {
       <ImageSlider images={product.imageURL} />
       <ProductDetails product={product} />
       <CommentSection comments={comments} />
-      <SimilarProducts products={similarProducts} />
     </div>
   )
 }
