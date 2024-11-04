@@ -3,7 +3,7 @@ import React from 'react'
 import CategoryNavigation from '@/components/navigation/CategoryNavigation'
 const RootLayout = ({children}: {children: React.ReactNode}) => {
   return (
-    <main className="background-light850_dark100 relative w-full   min-h-screen overflow-hidden">
+    <main suppressHydrationWarning className="background-light850_dark100 relative w-full   min-h-screen overflow-hidden">
       <Navbar />
       <CategoryNavigation />
       <div className="flex"> 

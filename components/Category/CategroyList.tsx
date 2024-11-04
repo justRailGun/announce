@@ -8,7 +8,7 @@ const CategroyList = () => {
   return (
     Object.entries(CATEGORY).map(([key,value],index)=>
         <Link href={`/$name`} key={index} className='px-2 flex items-center gap-2 py-1 my-2'>
-          <Image src={"icons/"+key+".svg"} alt={key} className='invert-colors' height={20} width={20}/>{value}
+          <Image src={"/icons/"+key+".svg"} alt={key} className='invert-colors' height={20} width={20}/>{value}
           </Link>)
   )
 }

@@ -9,10 +9,12 @@ const Navbar = () => {
   return (
     <nav
     className='w-full flex fixed items-center justify-between background-light900_dark300 p-6  text-dark100_light900 dark:shadow-none'
-    >
-        <h1 className='h1-bold '>
+    > 
+        <Link href='/'><h1 className='h1-bold '>
             Saha<span className='text-primary-500'> A</span> 
         </h1>
+        </Link>
+        
         <div className='flex items-center relative min-w-[300px]'>
             <Input type="text" placeholder="Search..." 
             className=' dark:bg-light-900 bg-gray-200 max-sm:hidden dark:placeholder:text-dark-100/60 border-2 w-full px-4 py-3 rounded-md focus:ring-0 focus:ring-offset-0' />
