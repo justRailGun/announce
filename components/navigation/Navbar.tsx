@@ -8,7 +8,7 @@ import SheetMenu from '../SheetMenu'
 const Navbar = () => {
   return (
     <nav
-    className='w-full flex fixed items-center justify-between background-light900_dark300 p-6  text-dark100_light900 dark:shadow-none'
+    className='w-full flex fixed items-center justify-between background-light900_dark200 p-6  text-dark100_light900 dark:shadow-none'
     > 
         <Link href='/'><h1 className='h1-bold '>
             Saha<span className='text-primary-500'> A</span> 

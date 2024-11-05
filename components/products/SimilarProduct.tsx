@@ -5,9 +5,7 @@ import ProductCard from './ProductCard'
 
 function SimilarProducts() {
         
-        for (let i = 0; i < PRODUCTS.length; i++) {
-            console.log(PRODUCTS[i])
-        }
+
 
         return (
           <div>

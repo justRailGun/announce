@@ -446,3 +446,12 @@ export const PRODUCTS = [
     price: 9.99,
 },
 ];
+
+export interface Product {
+    name: string;
+    description: string;
+    price: number;
+    rating: number;
+    numberOfRatings: number;
+    imageURL: string;  // or `string[]` if it’s an array of URLs
+  }

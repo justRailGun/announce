@@ -1,13 +1,16 @@
+import CommentSection from '@/components/products/CommentSection'
 import SimilarProducts from '@/components/products/SimilarProduct'
 import React from 'react'
 
 const ProductLayout = ({children} :{children:React.ReactNode}) => {
+
   return (
-    <section className='' suppressHydrationWarning>
+    <section suppressHydrationWarning>
+      <div>
         {children}
-        <div>
+      </div>
+            <CommentSection />
             <SimilarProducts />
-        </div>
     </section>
   )
 }
