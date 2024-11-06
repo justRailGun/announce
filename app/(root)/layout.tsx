@@ -7,8 +7,8 @@ const RootLayout = ({children}: {children: React.ReactNode}) => {
       <Navbar />
       <CategoryNavigation />
       <div className="flex"> 
-        <section className="flex container min-h-screen mx-auto flex-col px-6 pb-6 pt-24 max-md:pb-14">
-          <div className="mx-auto w-full">{children}</div>
+        <section className="flex container min-h-screen mx-auto px-6 py-24 xl:py-12">
+          {children}
         </section>
       </div>
     </main>

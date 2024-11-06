@@ -4,9 +4,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 
-
 function ImageSlider({ images } : { images : string}) {
-    const arrayOfImages =[images,images,images] ; 
+
     const [currentImage, setCurrentImage] = useState(0)
 
     const nextImage = () => {
@@ -16,16 +15,47 @@ function ImageSlider({ images } : { images : string}) {
       setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
     }
 
-    
+ 
+    console.log(currentImage)
       return (
-        <div  className="h-96 mb-8">
+        <div  className="h-full relative   mb-8 grid grid-cols-3 gap-0" 
+        >
+          
           <Image
-            src={arrayOfImages[currentImage]+'.png'}
-            alt={`Product image ${arrayOfImages[currentImage]}`}
-            objectFit="cover"
-            className="rounded-lg"
-            height={400}
-            width={400}
+            src={images+'.png'}
+            alt={`Product image ${images}`}
+            height={300}
+            width={300}
+          />
+          <Image
+            src={images+'.png'}
+            alt={`Product image ${images}`}
+            height={300}
+            width={300}
+          />
+          <Image
+            src={images+'.png'}
+            alt={`Product image ${images}`}
+            height={300}
+            width={300}
+          />
+          <Image
+          src={images+'.png'}
+          alt={`Product image ${images}`}
+          height={300}
+          width={300}
+          />
+          <Image
+          src={images+'.png'}
+          alt={`Product image ${images}`}
+          height={300}
+          width={300}
+          />
+          <Image
+          src={images+'.png'}
+          alt={`Product image ${images}`}
+          height={300}
+          width={300}
           />
           <Button
             variant="outline"

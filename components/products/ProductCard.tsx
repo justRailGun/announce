@@ -24,7 +24,7 @@ export default function ProductCard({product} : {product: Product}) {
       <CardContent className="p-4 justify-between h-[calc(100%-224px)] flex-col flex">
         <div>
           <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
-           <div className="flex justify-between items-center"><p className="mb-2 text-sm text-black/60">Samsung</p> <Tags /> </div>{/* Adding the brand later */}
+           <div className="flex justify-between items-center"><p className="mb-2 text-sm text-dark200_light800">Samsung</p> <Tags /> </div>{/* Adding the brand later */}
           <div className="flex justify-between items-center">
             <span className="text-lg font-bold text-green-600">${price}</span>
             <div className="flex items-center">

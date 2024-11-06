@@ -268,7 +268,9 @@ body {
   .btn-tertiary {
     @apply bg-light-700 dark:bg-dark-300 !important;
   }
-
+  .btn-lately{
+    @apply dark:bg-light-800 bg-dark-400 !important;
+  }
   .no-focus {
     @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
