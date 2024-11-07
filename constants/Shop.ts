@@ -10,6 +10,7 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'samsung@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
     },
     {
        id: 2 ,
@@ -22,6 +23,8 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'apple@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
     },
     {
        id: 3 ,
@@ -34,6 +37,7 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'google@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
     },
     {
        id: 4 ,
@@ -46,6 +50,7 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'samsung@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
     },
     {
        id: 5 ,
@@ -58,6 +63,7 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'apple@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
     },
     {
        id: 6 ,
@@ -70,6 +76,7 @@ export const SHOPS =[
        phone : '+91 987654321',
        email : 'google@gmail.com',
        address : '123 Main Street, Bangalore',
+       type : 'shop',
     },  
 ]
 
@@ -84,4 +91,6 @@ export interface Shop {
     phone: string;
     email: string;
     address: string;
+    type : string;
+    category : string[];
   }
