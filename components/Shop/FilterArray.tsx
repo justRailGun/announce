@@ -1,6 +1,7 @@
 import React from 'react'
+import { ShopCategory } from '@/constants/Shop';
 
-const FilterRequest = async ({category} :{category : Array}) => {
+const FilterArray = async ({category} :{category : ShopCategory}) => {
   const array = await category 
   return (
     <div className='flex flex-col gap-2 w-[200px]'>
@@ -16,4 +17,4 @@ const FilterRequest = async ({category} :{category : Array}) => {
   )
 }
 
-export default FilterRequest
+export default FilterArray

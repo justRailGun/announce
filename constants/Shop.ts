@@ -94,3 +94,6 @@ export interface Shop {
     type : string;
     category : string[];
   }
+export interface ShopCategory {
+   category: string[];
+  }

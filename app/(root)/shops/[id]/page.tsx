@@ -22,9 +22,8 @@ const page = async ({ params }: Params) => {
   const shop = getShop(route);
   const category = getCategory(shop as Shop); 
   
-  return (<div className='w-full relative container mx-auto h-screen'>
+  return (<div className='w-full relative container mx-auto'>
       <ShopHeader	shop={shop as Shop} />
-      {console.log(category)}
       <ShopFeed category ={category} />
     </div>
     
