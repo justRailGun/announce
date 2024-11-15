@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import  {ThemeProvider}  from "@/components/Theme"
+import {NuqsAdapter} from "nuqs/adapters/next/app";
 
 const Inter = localFont({
   src: "./fonts/InterFont.ttf",
@@ -34,7 +35,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          {children}
+            <NuqsAdapter >
+              {children}
+            </NuqsAdapter>  
         </ThemeProvider>
       </body>
     </html>
