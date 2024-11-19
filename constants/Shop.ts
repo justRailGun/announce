@@ -13,7 +13,7 @@ export const SHOPS =[
        type : 'shop',
     },
     {
-       id: 2 ,
+       id:2,
        name : 'Apple Store',
        bannerURL :'/images/banner.png',
        popularity : 2458,
@@ -93,7 +93,4 @@ export interface Shop {
     address: string;
     type : string;
     category : string[];
-  }
-export interface ShopCategory {
-   category: string[];
   }

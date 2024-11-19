@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-
+import {MessageCircleMore} from "lucide-react";
 
 
 
@@ -18,7 +18,7 @@ function CommentSection() {
         {comments.map((comment) => (
           <div key={comment.id} className="mb-4 p-4 bg-gray-100 rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold">{comment.user}</span>
+              <span className="font-semibold text-dark-200">{comment.user}</span>
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star
@@ -36,8 +36,8 @@ function CommentSection() {
           </div>
         ))}
         <div className="mt-4">
-          <Textarea placeholder="Leave a comment..." className="mb-2" />
-          <Button>Submit Comment</Button>
+          <Textarea placeholder="Leave a comment..." className="mb-4" />
+          <div className="flex justify-end "><Button className="bg-green-700 dark:bg-[#96FB4A] dark:hover:bg-[#89f03b] text-white hover:bg-green-900">Submit Comment <MessageCircleMore size={20}/></Button></div>
         </div>
       </div>
     )

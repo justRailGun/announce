@@ -9,7 +9,7 @@ const ShopSlider = () => (
     <h2 className="text-2xl font-bold text-dark200_light800 px-8">Sponsorisé</h2>
     <Marquee className="">
     {SHOPS.map((shop,index)=>{
-        return <Link href={`shops/ ${shop.id}`} key={index}><ShopCard  shop={shop}/>
+        return <Link href={`shops/${shop.id}`} key={index}><ShopCard  shop={shop}/>
         </Link> 
     })}
   </Marquee>
