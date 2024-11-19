@@ -36,7 +36,7 @@ export default function ProductCard({product} : {product: Product}) {
           </div>
         </div>
         <div className="flex justify-between items-center gap-2">
-          <Link className={btnClassName +' btn-tertiary'} href={"products/"+name}>More Details
+          <Link className={btnClassName +' btn-tertiary'} href={"/products/"+name}>More Details
           <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
           </Link>
           <button className={btnClassName +" btn-secondary"}>
