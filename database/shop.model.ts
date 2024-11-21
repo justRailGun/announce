@@ -33,8 +33,8 @@ const shopSchema = new Schema({
         type:String,
         default:''
     },
-    owner:
-    {type:Schema.Types.ObjectId, ref:'User'}
+//     owner:
+//     {type:Schema.Types.ObjectId, ref:'User'}
 })
 
 const Shop = models.Shop || model('Shop', shopSchema)

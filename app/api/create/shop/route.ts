@@ -2,6 +2,8 @@ import dbConnect from "@/lib/dbconnect";
 import  Shop  from "@/database/shop.model";
 import { ShopSchema } from "@/lib/validation";
 import { NextResponse } from "next/server";
+
+
 export async function POST(request : Request){
     try {
         await dbConnect();
