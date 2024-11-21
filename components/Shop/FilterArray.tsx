@@ -26,7 +26,7 @@ const FilterArray = ({ category }: { category: Shop['category'] }) => {
   };
 
   return (
-    <div className='flex bg-gray-800/60 top-24 sticky h-full p-4 flex-col gap-2 w-[200px]'>
+    <div suppressHydrationWarning className='flex bg-gray-800/60 top-24 sticky h-full p-4 flex-col gap-2 w-[200px]'>
       <h3 className='text-dark200_light800 h3-bold'>Filters</h3>
       {array.map((categoryItem, index) => (
         <div key={index} className='flex items-center justify-between gap-4'>

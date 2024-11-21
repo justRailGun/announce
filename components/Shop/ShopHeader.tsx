@@ -6,7 +6,7 @@ import React from 'react'
 const ShopHeader = ({shop}: {shop : Shop}) => {
     const {bannerURL , name , popularity , overallRating , numberOfOrders , location , phone , email , address} = shop;
   return (
-    <section className='container py-12 max-lg:py-24 mx-auto w-full'>
+    <section suppressHydrationWarning className='container py-12 max-lg:py-24 mx-auto w-full'>
       <Image src={bannerURL} width={10000} height={20} alt={`${name}`} className="w-full h-full object-contain" />
 
       <div className='pt-6 font-inter background-light900_dark200 p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>

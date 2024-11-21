@@ -11,6 +11,8 @@ export const SHOPS =[
        email : 'samsung@gmail.com',
        address : '123 Main Street, Bangalore',
        type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
+
     },
     {
        id:2,
@@ -38,6 +40,8 @@ export const SHOPS =[
        email : 'google@gmail.com',
        address : '123 Main Street, Bangalore',
        type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
+
     },
     {
        id: 4 ,
@@ -51,6 +55,8 @@ export const SHOPS =[
        email : 'samsung@gmail.com',
        address : '123 Main Street, Bangalore',
        type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
+
     },
     {
        id: 5 ,
@@ -64,6 +70,8 @@ export const SHOPS =[
        email : 'apple@gmail.com',
        address : '123 Main Street, Bangalore',
        type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
+
     },
     {
        id: 6 ,
@@ -77,6 +85,8 @@ export const SHOPS =[
        email : 'google@gmail.com',
        address : '123 Main Street, Bangalore',
        type : 'shop',
+       category :["Headset","Laptop","Smartphone","Tablet","Watch" , "Mouse" , "Keyboard" , "Monitor" , "Storage", "Camera" , "Speakers" , "Headphones" , "Accessories"],
+
     },  
 ]
 

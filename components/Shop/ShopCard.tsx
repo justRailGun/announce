@@ -9,7 +9,7 @@ const ShopCard = ({shop} : {shop: Shop}) => {
 
     const {name,bannerURL,popularity,overallRating,numberOfOrders} = shop
   return (
-    <Card className="w-72 shadow-lg overflow-hidden transition-all m-4 duration-300 hover:shadow-lg">
+    <Card suppressHydrationWarning className="w-72 shadow-lg overflow-hidden transition-all m-4 duration-300 hover:shadow-lg">
     <div className="relative h-48 overflow-hidden">
       <Image
         src={bannerURL}

@@ -8,7 +8,7 @@ import { Shop } from '@/constants/Shop';
 const ShopFeed =  ({category} : {category : Shop['category']}) => {
     const filter =  category ;
   return (
-    <section className='flex relative'>
+    <section suppressHydrationWarning className='flex relative'>
       
         <FilterArray category={filter} /> 
       
