@@ -7,6 +7,7 @@ import Image from 'next/image'
 import SheetMenu from '../SheetMenu'
 import {useState,useEffect} from 'react'
 import LocalSearch from '../search/LocalSearch'
+import { Plus } from 'lucide-react'
 const Navbar = () => {
   const [scrollY, setScrollY] = useState(false)
   useEffect(()=>{
@@ -33,12 +34,12 @@ const Navbar = () => {
             </div>
         <div className='flex items-center justify-center gap-2 max-sm:hidden'> 
             <div className='flex items-center font-inter gap-4'>
-              <ModeToggle />
+              <Link href={ROUTES.CREATE} className="px-4 py-2 rounded-lg btn-secondary flex flex-row gap-4 items-center">Create Your Offer or Shop <Plus size={20} /></Link>
               <Link href={ROUTES.LOGIN} className="px-4 py-2 ">Login</Link>
               <div className='flex items-center gap-4'>
                 <Link href={ROUTES.CART} className='flex  items-center gap-2'>
                   <Image src="/icons/cart.svg" className='invert-colors' width={32} height={32} alt="cart" />Cart
-                </Link>
+                </Link><ModeToggle />
                 {scrollY &&             
                 <SheetMenu trigger={<Image src="/icons/hamburger.svg" className='invert-colors' width={32} height={32} alt="hamburger" />} />
               }

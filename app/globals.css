@@ -264,7 +264,7 @@ body {
   }
 
   .btn-secondary {
-    @apply bg-light-800 dark:bg-dark-400 !important;
+    @apply bg-light-800 dark:bg-dark-400 hover:bg-light-800/45 hover:dark:bg-dark-400/45 !important;
   }
 
   .btn-tertiary {
