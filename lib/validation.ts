@@ -49,3 +49,11 @@ export const SignInSchema = z.object({
         message: "Password must contain at least one special character.",
       }),
   });
+
+export const ShopSchema = z.object({
+    name: z.string().min(2).max(50),
+    description : z.string().min(2).max(50),
+    location : z.string().min(2).max(10),
+    adress: z.string().min(2).max(50),
+    phone: z.string().min(2).max(50).regex(/^[0-9]+$/),
+  })
