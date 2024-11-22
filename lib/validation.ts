@@ -57,3 +57,10 @@ export const ShopSchema = z.object({
     adress: z.string().min(2).max(50),
     phone: z.string().min(2).max(50).regex(/^[0-9]+$/),
   })
+
+export const ProductSchema = z.object({
+    name: z.string().min(2).max(50),
+    description : z.string().min(2).max(500),
+    price: z.string().min(1).max(1000),
+    category: z.string().min(2).max(50),
+})

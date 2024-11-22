@@ -1,18 +1,17 @@
 'use client'
 import React from 'react'
 import CreateForm from '@/components/forms/createForm'
-import { ShopSchema } from '@/lib/validation'
+import { ProductSchema } from '@/lib/validation'
 const page = () => {
   const defaultValues = {
     name: "",
     description: "",
-    location: "",
-    adress: "",
-    phone: "",
+    price: "",
+    category: "",
   }
   return (
     <section className='flex flex-col items-center justify-center w-full h-screen'>
-      <CreateForm defaultValues={defaultValues} fetchApi='/api/create/shop' SchemaType={ShopSchema}/>
+      <CreateForm defaultValues={defaultValues} fetchApi="/api/create/products" SchemaType={ProductSchema}/>
     </section>
   )
 }

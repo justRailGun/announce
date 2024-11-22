@@ -8,6 +8,7 @@ import SheetMenu from '../SheetMenu'
 import {useState,useEffect} from 'react'
 import LocalSearch from '../search/LocalSearch'
 import { Plus } from 'lucide-react'
+import ModalTrigger from '../Modal'
 const Navbar = () => {
   const [scrollY, setScrollY] = useState(false)
   useEffect(()=>{
@@ -34,7 +35,9 @@ const Navbar = () => {
             </div>
         <div className='flex items-center justify-center gap-2 max-sm:hidden'> 
             <div className='flex items-center font-inter gap-4'>
-              <Link href={ROUTES.CREATE} className="px-4 py-2 rounded-lg btn-secondary flex flex-row gap-4 items-center">Create Your Offer or Shop <Plus size={20} /></Link>
+             
+              <ModalTrigger  >Create Your Offer or Shop <Plus size={20} /></ModalTrigger>
+              
               <Link href={ROUTES.LOGIN} className="px-4 py-2 ">Login</Link>
               <div className='flex items-center gap-4'>
                 <Link href={ROUTES.CART} className='flex  items-center gap-2'>

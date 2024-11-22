@@ -13,10 +13,9 @@ const baseProductSchema = new Schema({
         type:Number,
         required:true
     },
-    image:{
-        type:String,
-        required:true
-    },
+    // image:{
+    //     type:String,
+    // },
     category:{
         type: String,
         required:true
@@ -25,9 +24,9 @@ const baseProductSchema = new Schema({
         type: Number,
         default: 0
     },
-    buyer:[{
-        type : Schema.Types.ObjectId, ref:'User', required:true
-    }]
+    // buyer:[{
+    //     type : Schema.Types.ObjectId, ref:'User', required:true
+    // }]
 })
 
 const BaseProduct = models.BaseProduct || model('BaseProduct', baseProductSchema) 
