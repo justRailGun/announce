@@ -10,11 +10,11 @@ const vehiculeSchema = new Schema({
         required:true
     },
     power : {
-        type:Number,
+        type:String,
         required:true
     },
-    distanceTravelled:{
-        type:Number,
+    mileage:{
+        type:String,
         required:true
     },
     date:{
@@ -29,6 +29,6 @@ const vehiculeSchema = new Schema({
     },
 })
 
-const Vehicule = BaseProduct.discriminator('Vehicule', vehiculeSchema);
+const Vehicule = BaseProduct.discriminators?.Vehicule || BaseProduct.discriminator('Vehicule', vehiculeSchema);
 
 export default Vehicule

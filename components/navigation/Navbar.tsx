@@ -36,7 +36,7 @@ const Navbar = () => {
         <div className='flex items-center justify-center gap-2 max-sm:hidden'> 
             <div className='flex items-center font-inter gap-4'>
              
-              <ModalTrigger  >Create Your Offer or Shop <Plus size={20} /></ModalTrigger>
+              <ModalTrigger  >Create  <Plus size={20} /></ModalTrigger>
               
               <Link href={ROUTES.LOGIN} className="px-4 py-2 ">Login</Link>
               <div className='flex items-center gap-4'>

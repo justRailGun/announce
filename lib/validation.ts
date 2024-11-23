@@ -64,3 +64,37 @@ export const ProductSchema = z.object({
     price: z.string().min(1).max(1000),
     category: z.string().min(2).max(50),
 })
+
+
+export const ClothesSchema = ProductSchema.extend({
+    type: z.string().min(2).max(50),
+    size: z.string().max(50),
+    color: z.string().min(2).max(50),
+    brand: z.string().min(2).max(50),
+    materiel: z.string().min(2).max(50),
+})
+
+export const SmallProductSchema = ProductSchema.extend({
+    type: z.string().min(2).max(50),
+    brand: z.string().min(2).max(50),
+    model: z.string().min(2).max(50),
+    state: z.string().min(2).max(50),
+})
+
+export const RealEstateSchema = ProductSchema.extend({
+    location: z.string().min(2).max(50),
+    bedrooms: z.string().min(1).max(2),
+    bathrooms: z.string().min(1).max(2),
+    surface: z.string().min(1).max(20),
+    floors: z.string().min(1).max(2),
+})
+
+export const VehiculeSchema = ProductSchema.extend({
+    brand: z.string().min(2).max(50),
+    model: z.string().min(2).max(50),
+    color: z.string().min(2).max(50),
+    date: z.string().min(2).max(50),
+    fuel: z.string().min(2).max(50),
+    mileage: z.string().min(2).max(50),
+    power: z.string().min(2).max(50),
+})

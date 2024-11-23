@@ -7,23 +7,23 @@ const realEstateSchema = new Schema({
         required:true
     },
     bedrooms:{
-        type:Number,
+        type:String,
         required:true
     },
     bathrooms:{
-        type:Number,
+        type:String,
         required:true
     }, 
     surface: {
-        type:Number,
+        type:String,
         required:true
     },
     floors:{
-        type:Number,
+        type:String,
         required:true
     }
 })
 
-const ReslEstate = BaseProduct.discriminator('ReslEstate', realEstateSchema);
+const RealEstate = BaseProduct.discriminators?.RealEstate ||  BaseProduct.discriminator('RealEstate', realEstateSchema);
 
-export default ReslEstate
+export default RealEstate

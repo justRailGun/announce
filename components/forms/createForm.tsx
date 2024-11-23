@@ -45,7 +45,7 @@ const CreateForm = <T extends FieldValues>({defaultValues, fetchApi, SchemaType 
   }
   return (
     <Form {...form}>
-      <form  onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col items-center gap-4 justify-center">
+      <form  onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4 ">
         {Object.keys(defaultValues).map((field,index)=>(
             <FormField
             key={index}

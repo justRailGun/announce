@@ -21,6 +21,6 @@ const clotheSchema = new Schema({
 })
 
 
-const Clothe =BaseProduct.discriminator('Clothe', clotheSchema);
+const Clothe = BaseProduct.discriminators?.Clothe ||  BaseProduct.discriminator('Clothe', clotheSchema)
 
 export default Clothe
