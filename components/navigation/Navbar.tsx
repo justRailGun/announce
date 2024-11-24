@@ -7,9 +7,13 @@ import Image from 'next/image'
 import SheetMenu from '../SheetMenu'
 import {useState,useEffect} from 'react'
 import LocalSearch from '../search/LocalSearch'
-import { Plus } from 'lucide-react'
+import { Plus,LogOut, LogIn , ShoppingCart} from 'lucide-react'
 import ModalTrigger from '../Modal'
-const Navbar = () => {
+import { useSession } from 'next-auth/react'
+import { Button } from '../ui/button'
+import { signOut } from 'next-auth/react'
+const  Navbar =  () => {
+  const {data:session} = useSession()
   const [scrollY, setScrollY] = useState(false)
   useEffect(()=>{
     window.addEventListener('scroll',()=>{
@@ -37,11 +41,13 @@ const Navbar = () => {
             <div className='flex items-center font-inter gap-4'>
              
               <ModalTrigger  >Create  <Plus size={20} /></ModalTrigger>
+              {!session? 
+              <Link href={ROUTES.LOGIN} className="px-4 py-2 items-center justify-center flex gap-2">Login <LogIn size={20}/></Link> : 
+              <Button onClick={()=>signOut()} className='px-4 py-2 bg-red-700 dark:text-white dark:bg-red-600'>Logout <LogOut size={20} /></Button>}
               
-              <Link href={ROUTES.LOGIN} className="px-4 py-2 ">Login</Link>
               <div className='flex items-center gap-4'>
-                <Link href={ROUTES.CART} className='flex  items-center gap-2'>
-                  <Image src="/icons/cart.svg" className='invert-colors' width={32} height={32} alt="cart" />Cart
+                <Link href={ROUTES.CART} className='flex items-center gap-2'>
+                  Cart <ShoppingCart size={20} />
                 </Link><ModeToggle />
                 {scrollY &&             
                 <SheetMenu trigger={<Image src="/icons/hamburger.svg" className='invert-colors' width={32} height={32} alt="hamburger" />} />
