@@ -1,12 +1,13 @@
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Store, ArrowLeft, Shirt, Car, Building, Package } from "lucide-react";
+import { Store, ArrowLeft, Shirt, Car, Building, Package, Sofa } from "lucide-react";
 import {
   ClothesSchema,
   ShopSchema,
   RealEstateSchema,
   VehiculeSchema,
   SmallProductSchema,
+  FurnitureSchema,
 } from "@/lib/validation";
 
 import {
@@ -15,6 +16,7 @@ import {
   ShopDefaultValues,
   SmallProductDefaultValues,
   VehiculeDefaultValues,
+  FurnitureDefaultValues
 } from "@/constants/DefaultValues";
 
 import {
@@ -28,7 +30,7 @@ import {
 
 import CreateForm from "./forms/createForm";
 
-type CategoryKeys = "clothes" | "real-estate" | "vehicle" | "product"; // Étape 1 : Déclare le type
+type CategoryKeys = "clothes" | "real-estate" | "vehicle" | "product" | "furniture"; // Étape 1 : Déclare le type
 
 export default function ModalTrigger({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,6 +68,11 @@ export default function ModalTrigger({ children }: { children: React.ReactNode }
       fetchApi: "/api/create/product",
       schema: SmallProductSchema,
     },
+    furniture : {
+      defaultValues: FurnitureDefaultValues,
+      fetchApi: "/api/create/furniture",
+      schema: FurnitureSchema,
+    }
   };
 
   const selectedCategory = isCategoryChoosed ? categoryConfig[isCategoryChoosed] : null; // Étape 3
@@ -126,6 +133,13 @@ export default function ModalTrigger({ children }: { children: React.ReactNode }
                   variant="outline"
                 >
                   Product <Package className="ml-2" />
+                </Button>
+                <Button
+                  className="w-full"
+                  onClick={() => handleCategoryChoose("furniture")}
+                  variant="outline"
+                >
+                  Furniture <Sofa className="ml-2" />
                 </Button>
               </div>
             )}

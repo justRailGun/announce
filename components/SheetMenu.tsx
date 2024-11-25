@@ -13,11 +13,32 @@ import {  useSession, signOut } from 'next-auth/react'
 import { Button } from './ui/button'
 import Link from 'next/link'
 import { ROUTES } from '@/constants/route'
-import { Activity,  Building,  ChevronDown, LayoutDashboard, LogIn, LogOut, Save, ShoppingCart } from 'lucide-react'
+import { Activity,  Building,  Car,  ChevronDown, LayoutDashboard, LogIn, LogOut, Package, Save, Shirt, ShoppingCart, Sofa } from 'lucide-react'
+import { useQueryState } from 'nuqs'
+
 const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?: boolean}) => {
   const {data:session} = useSession() ;
   const [openSection, setOpenSection] = useState<string | null>(null)
+  const [category,setCategory] = useQueryState("category")
 
+  const handleClick = (value: string) => {
+    if(value===category){
+      setCategory(null)
+    }else{
+      setCategory(value)
+    }
+  }
+  const iconCheck = (value: string) => {
+    const icons: Record<string, React.ElementType | null> = {
+      "Real Estate":Building,
+      "Clothing": Shirt ,
+      "Product": Package ,
+      "Vehicule": Car ,
+      "Furniture" : Sofa, 
+    };
+  
+    return icons[value] || null;
+  };
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section)
   }
@@ -35,14 +56,14 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
       )}
     </Button>
   )
-  const SidebarSection = ({ title, icon: Icon, items }: { title: string, icon: React.ElementType, items: { title: string, icon: React.ElementType }[] }) => (
+  const SidebarSection = ({ title, icon: Icon, items }: { title: string, icon:React.ElementType | null , items: { title: string, icon: React.ElementType }[] }) => (
     <div className=''>
       <Button
         variant="ghost"
         className="w-full text-lg justify-start text-dark100_light900 hover:bg-zinc-300 "
         onClick={() => toggleSection(title)}
       >
-        <Icon className="mr-2 h-4 w-4" />
+        {Icon && <Icon className="mr-2 h-4 w-4" />}
         {title}
         <ChevronDown className={`ml-auto h-4 w-4 transition-transform duration-200 ${
           openSection === title ? "rotate-180" : ""
@@ -55,6 +76,7 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
               key={index}
               variant="ghost"
               className="w-full justify-start pl-8 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+              onClick={()=>handleClick(item.title.toLocaleLowerCase())}
             >
               <item.icon className="mr-2 h-4 w-4" />
               {item.title}
@@ -80,17 +102,17 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
                           <SidebarItem icon={LayoutDashboard}>Dashboard</SidebarItem>
                           <SidebarItem icon={Activity} badge={10}>Activity</SidebarItem>
                           <SidebarItem icon={ShoppingCart} badge={8}>My Cart</SidebarItem>
-                          <div className='flex items-center justify-center gap-4 mt-4'>
-                            <div className='bg-zinc-300 w-full h-1'></div>
-                            <p className='font-inter text-dark400_light700 text-sm'>Category</p>
-                            <div className='bg-zinc-300 w-full h-1'></div>
+                          <div className='flex items-center  justify-center gap-4 mt-4'>
+                            <div className='bg-zinc-300 w-16 h-1'></div>
+                            <span className='font-inter text-dark400_light700 text-sm'>Filter by: Category</span>
+                            <div className='bg-zinc-300 w-16 h-1'></div>
                           </div>
                       
                           {arrayCategory.map((item, index) => (
                             <SidebarSection
                               key={index}
                               title={item}
-                              icon={Building}
+                              icon={iconCheck(item)}
                               items={categoryItems[item]}
                             />
                           ))}

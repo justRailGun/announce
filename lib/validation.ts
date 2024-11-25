@@ -98,3 +98,9 @@ export const VehiculeSchema = ProductSchema.extend({
     mileage: z.string().min(2).max(50),
     power: z.string().min(2).max(50),
 })
+
+export const FurnitureSchema = ProductSchema.extend({
+    type: z.string().max(50),
+    size: z.string().max(50),
+    materiel: z.string().max(50),
+})

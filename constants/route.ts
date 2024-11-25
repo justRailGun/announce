@@ -4,4 +4,8 @@ export const ROUTES={
     REGISTER:'/register', 
     CART:'/cart',
     CREATE:"/create/shop",
+    PRODUCTSAPIPOST: "/api/products/create/",
+    PRODUCTSGET:  '/api/products/',
+    SHOPSPOST : '/api/shop/create',
+    SHOPSGET :"/api/shop/"
 }

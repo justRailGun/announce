@@ -54,3 +54,12 @@ export const ClotheDefaultValues = {
     mileage :"",
     power :"",
   }
+  export const FurnitureDefaultValues = {
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    type :"",
+    size : '' ,
+    materiel :''
+  }

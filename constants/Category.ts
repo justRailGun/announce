@@ -9,16 +9,17 @@ export const CATEGORY ={
      book:'Books & Media',
 }
 
-export const arrayCategory: Array<"Real Estate" | "Clothing" | "Product" | "Vehicule"> = [
+export const arrayCategory: Array<"Real Estate" | "Clothing" | "Product" | "Vehicule" | "Furniture"> = [
      "Real Estate",
      "Clothing",
      "Product",
      "Vehicule",
+     "Furniture"
    ];
-import { Building, Home, Store , Car, Truck, Bike,Footprints ,SendToBack, Luggage, Briefcase, Shirt, Sofa } from "lucide-react";
+import { Building, Home, Store , Car, Truck, Bike,Footprints ,SendToBack, Luggage, Briefcase, Shirt, Sofa, BedSingle, Armchair } from "lucide-react";
 
 export const categoryItems : Record<
-"Real Estate" | "Clothing" | "Product" | "Vehicule",
+"Real Estate" | "Clothing" | "Product" | "Vehicule"| "Furniture",
 { title: string; icon: React.ElementType }[]
 > = {
   "Real Estate": [
@@ -38,7 +39,7 @@ export const categoryItems : Record<
     { title: "Accessory", icon: SendToBack },
   ],
   "Product": [
-    { title: "Small Product", icon: Sofa }, // Adjust this as needed
+    { title: "Small Product", icon: Sofa }, 
     { title: "Clothe", icon: Shirt },
     { title: "Shop", icon: Store },
   ],
@@ -48,5 +49,10 @@ export const categoryItems : Record<
     { title: "Bicycle", icon: Bike },
     { title: "Truck", icon: Truck },
   ],
+   "Furniture" : [
+    { title: "Sofa", icon: Sofa },
+    { title: "Chair", icon: Armchair },
+    { title: "Table", icon:  BedSingle},
+   ],
 };
 

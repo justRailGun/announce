@@ -5,7 +5,12 @@
 body {
   font-family: "Inter", sans-serif;
 }
-
+*{
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 :root {
   --radius: 8px;
 }
