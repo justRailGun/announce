@@ -3,6 +3,14 @@
 
 import { Button } from "@/components/ui/button"
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+import {
   Form,
   FormControl,
   FormField,
@@ -13,7 +21,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { z } from "zod"
- 
+import { useSession } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldValues, Path, useForm, DefaultValues } from "react-hook-form"
 
@@ -29,14 +37,14 @@ const CreateForm = <T extends FieldValues>({defaultValues, fetchApi, SchemaType 
     resolver: zodResolver(SchemaType),
     defaultValues: defaultValues as DefaultValues<T>,
   })
-
+const {data : session} = useSession()
   function onSubmit(values: z.infer<typeof SchemaType>) {
     fetch(fetchApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify({body: values, userId : session?.user?.id}),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -62,7 +70,20 @@ const CreateForm = <T extends FieldValues>({defaultValues, fetchApi, SchemaType 
                     className="resize-none min-w-80"
                     {...formField} 
                   />
-                    :           
+                    : field.toString().toLowerCase()==='size' || field.toString().toLowerCase()==='category' || field.toString().toLowerCase()==='type' ? <>
+                        <Select>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder={field.charAt(0).toUpperCase() + field.slice(1)} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {(defaultValues[field] as string[]).map((option : string,index : number)=>(
+                            <SelectItem key={index} value={option}>{option}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+
+                    </> : 
+                    
                       <Input className="min-w-80" placeholder={field.charAt(0).toUpperCase() + field.slice(1)} {...formField} /> 
                     
                     }
@@ -74,7 +95,7 @@ const CreateForm = <T extends FieldValues>({defaultValues, fetchApi, SchemaType 
             )}
         />))}
         
-        <Button type="submit" className='mt-2 min-w-80'>Create Now</Button>
+        <Button type="submit" className='mt-8 min-w-80'>Create Now</Button>
       </form>
     </Form>
   )

@@ -33,10 +33,13 @@ const shopSchema = new Schema({
         type:String,
         default:''
     },
-//     owner:
-//     {type:Schema.Types.ObjectId, ref:'User'}
-})
+    userId:{
+        type:Schema.Types.ObjectId, 
+        ref:'User' , 
+        unique:true
+    }
+},{timestamps:true})
 
-const Shop = models.Shop || model('Shop', shopSchema)
+const Shop = models?.Shop || model('Shop', shopSchema)
 
 export default Shop

@@ -57,7 +57,7 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
     </Button>
   )
   const SidebarSection = ({ title, icon: Icon, items }: { title: string, icon:React.ElementType | null , items: { title: string, icon: React.ElementType }[] }) => (
-    <div className=''>
+    <span className=''>
       <Button
         variant="ghost"
         className="w-full text-lg justify-start text-dark100_light900 hover:bg-zinc-300 "
@@ -70,7 +70,7 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
         }`} />
       </Button>
       {openSection === title && (
-        <div className="mt-1  space-y-1">
+        <span className="mt-1  space-y-1">
           {items.map((item, index) => (
             <Button
               key={index}
@@ -82,9 +82,9 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
               {item.title}
             </Button>
           ))}
-        </div>
+        </span>
       )}
-    </div>
+    </span>
   )
   return (
     <Sheet>
@@ -98,15 +98,15 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
                       {session && <SheetDescription>Signed in as {session?.user?.name}</SheetDescription>}
                     </SheetTitle>
                 <SheetDescription>
-                        <div className='flex flex-col gap-4 mt-16'>
+                        <span className='flex flex-col gap-4 mt-16'>
                           <SidebarItem icon={LayoutDashboard}>Dashboard</SidebarItem>
                           <SidebarItem icon={Activity} badge={10}>Activity</SidebarItem>
                           <SidebarItem icon={ShoppingCart} badge={8}>My Cart</SidebarItem>
-                          <div className='flex items-center  justify-center gap-4 mt-4'>
-                            <div className='bg-zinc-300 w-16 h-1'></div>
+                          <span className='flex items-center  justify-center gap-4 mt-4'>
+                            <span className='bg-zinc-300 w-16 h-1'></span>
                             <span className='font-inter text-dark400_light700 text-sm'>Filter by: Category</span>
-                            <div className='bg-zinc-300 w-16 h-1'></div>
-                          </div>
+                            <span className='bg-zinc-300 w-16 h-1'></span>
+                          </span>
                       
                           {arrayCategory.map((item, index) => (
                             <SidebarSection
@@ -116,19 +116,19 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode,isMenu?
                               items={categoryItems[item]}
                             />
                           ))}
-                        </div>
+                        </span>
                   </SheetDescription>
               </SheetHeader>
                     
                     <SheetDescription>
                         {session ? 
-                        <div className='flex flex-col gap-2 items-center'>               
+                        <span className='flex flex-col gap-2 items-center'>               
                             <Button className="px-4 py-2 items-center justify-center w-full flex gap-2" onClick={()=>signOut()}>Sign Out <LogOut size={20} /></Button>
-                        </div>:
-                        <div className='flex gap-2 items-center flex-col'>
+                        </span>:
+                        <span className='flex gap-2 items-center flex-col'>
                             <Button  className='w-full' asChild><Link href={ROUTES.LOGIN} className="px-4 py-2 items-center justify-center flex gap-2">Login <LogIn size={20}/></Link></Button>
                             <Button  className='w-full' asChild><Link href={ROUTES.REGISTER} className="px-4 py-2 items-center justify-center flex gap-2">Sign In <Save size={20}/></Link></Button>
-                        </div>}
+                        </span>}
               </SheetDescription>
           </SheetContent>
       </Sheet> 

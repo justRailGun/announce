@@ -7,9 +7,9 @@ export async function GET() {
       await dbConnect();
   
       const product = await BaseProduct.find();
-      
-      return NextResponse.json({ success: true, data: product }, { status: 200 });
-    } catch (error) {
+
+      return NextResponse.json({ success: true, data:product});
+    } catch (error) {     
         console.log(error)
     }
   }
