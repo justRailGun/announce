@@ -104,3 +104,9 @@ export const FurnitureSchema = ProductSchema.extend({
     size:z.array(z.string().min(2).max(50)),
     materiel: z.string().max(50),
 })
+
+export const UserSchema = z.object({
+    name: z.string().min(2).max(50),
+    email: z.string().min(2).max(50),
+    username : z.string().min(2).max(50),
+  })
