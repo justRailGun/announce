@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       }
   
       // Check for existing shop
-      const existingShop = await Shop.findOne({ where: { userId } });
+      const existingShop = await Shop.findOne({ userId });
       if (existingShop) {
         return NextResponse.json(
           { success: false, error: "Shop already exists" },
@@ -48,4 +48,16 @@ export async function POST(request: Request) {
       );
     }
   }
+
+export async function GET() {
+  try {
+    await dbConnect();
+
+    const shops = await Shop.find();
+
+    return NextResponse.json({ success: true, data: shops }, { status: 200 });
+  } catch (error) {
+    throw new Error("Internal Server Error", { cause: error });
+  }
+}
   

@@ -10,30 +10,14 @@ const userSchema= new Schema({
         required : true,
         unique  : true,
     },
-    // password :{
-    //     type: String,
-    //     required : true, 
-    // },
     image :{
         type: String,
         required : true, 
     },
-    // role :{
-    //     type: String,
-    //     required : true, 
-    //     default : "user",
-    // },
-    shop :{
-        type: Schema.Types.ObjectId,
-        ref: "Shop",
-        required : true,
+    role :{
+        type: String,
+        default : "user",
     },
-    // product :[{
-    //     type: Schema.Types.ObjectId,
-    //     ref: "BaseProduct",
-    //     required : true,
-    // }],
-    
 },{timestamps: true}) 
 
 const User = models.User || model('User', userSchema)

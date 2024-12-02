@@ -24,6 +24,7 @@ import { z } from "zod"
 import { useSession } from "next-auth/react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FieldValues, Path, useForm, DefaultValues } from "react-hook-form"
+import { useToast } from "@/hooks/use-toast"
 
 interface Props<T extends FieldValues>{
     defaultValues : T,
@@ -37,19 +38,28 @@ const CreateForm = <T extends FieldValues>({defaultValues, fetchApi, SchemaType 
     resolver: zodResolver(SchemaType),
     defaultValues: defaultValues as DefaultValues<T>,
   })
+const { toast } = useToast()
 const {data : session} = useSession()
-  function onSubmit(values: z.infer<typeof SchemaType>) {
-    fetch(fetchApi, {
+  async function onSubmit(values: z.infer<typeof SchemaType>) {
+    const res = await fetch(fetchApi, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({body: values, userId : session?.user?.id}),
+      body: JSON.stringify({body:values, userId : session?.user?.id}),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+    if(res.ok){
+      toast({
+        title : "Shop Created",
+        description : "Good job you created your own Shop"
+      })
+    }else{
+      toast({
+        title : "Error",
+        description : "You can't have more than one Shop",
+        variant: "destructive",
+      })
+    }
   }
   return (
     <Form {...form}>

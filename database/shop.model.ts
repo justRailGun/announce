@@ -34,9 +34,9 @@ const shopSchema = new Schema({
         default:''
     },
     userId:{
-        type:Schema.Types.ObjectId, 
-        ref:'User' , 
-        unique:true
+        type:String, 
+        unique:true,
+        required : true,
     }
 },{timestamps:true})
 

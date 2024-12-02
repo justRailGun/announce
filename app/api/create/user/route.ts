@@ -25,21 +25,31 @@ export async function POST(request: Request) {
     const validatedData = UserSchema.safeParse(body);
 
     if (!validatedData.success) {
-      throw new Error()
+      return NextResponse.json(
+        { success: false, error: "Validation failed", details: validatedData.error },
+        { status: 400 }
+      );
     }
 
-    const { email, username } = validatedData.data;
+    const { email } = validatedData.data;
 
     const existingUser = await User.findOne({ email });
-    if (existingUser) throw new Error("User already exists");
-
-    const existingUsername = await User.findOne({ username });
-    if (existingUsername) throw new Error("Username already exists");
+    if (existingUser) {
+      console.log("User already exists");
+      return NextResponse.json(
+        { success: true, message: "User already exists" },
+        { status: 200 }
+      );
+    }
 
     const newUser = await User.create(validatedData.data);
 
     return NextResponse.json({ success: true, data: newUser }, { status: 201 });
   } catch (error) {
-    throw error;
+    console.error("Error creating user:", error);
+    return NextResponse.json(
+      { success: false, error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

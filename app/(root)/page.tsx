@@ -1,13 +1,13 @@
+
 import Store from "@/components/feed/Store";
-import ShopSlider from "@/components/Shop/ShopSlider";
+// import ShopSlider from "@/components/Shop/ShopSlider";
 
 
 const Home = async () => {
 
-
   return (
     <section className="max-xl:pt-24 pt-24">
-      <ShopSlider />
+      {/* <ShopSlider /> */}
       <div className="flex container min-h-screen mx-auto">
          <Store  />
       </div>
