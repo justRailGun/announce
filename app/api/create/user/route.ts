@@ -37,8 +37,8 @@ export async function POST(request: Request) {
     if (existingUser) {
       console.log("User already exists");
       return NextResponse.json(
-        { success: true, message: "User already exists" },
-        { status: 200 }
+        { success: false, message: "User already exists" },
+        { status: 400 }
       );
     }
 

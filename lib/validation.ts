@@ -62,10 +62,15 @@ export const ProductSchema = z.object({
     name: z.string().min(2).max(50),
     description : z.string().min(2).max(500),
     price: z.string().min(1).max(1000),
-    category: z.array(z.string().min(2).max(50))
+    subCategory: z.string().min(1),
 })
-
-
+export const CategorySchema = z.object({
+  name: z.string().min(2),
+})
+export const SubCategorySchema =z.object({
+  name: z.string(),
+  category : z.string(),
+})
 export const ClothesSchema = ProductSchema.extend({
     type: z.array(z.string().min(2).max(50)),
     size: z.array(z.string().min(2).max(50)),
