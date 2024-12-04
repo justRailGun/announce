@@ -35,7 +35,7 @@ export default function ProfileForm() {
     },
   })
   type Category = {
-    _id: number;
+    _id: string;
     name: string;
     slug: string;
   }
@@ -65,7 +65,6 @@ export default function ProfileForm() {
         title: "SubCategory Created",
         description: "SubCategory created successfully",
       })
-      form.reset();
     }
     else{
       toast({
@@ -94,7 +93,7 @@ export default function ProfileForm() {
                 </FormControl>
                 <SelectContent>
                     {categories.map((item)=>(
-                        <SelectItem key={item._id} value={item.slug}>{item.name}</SelectItem>
+                        <SelectItem key={item.slug} value={item._id}>{item.name}</SelectItem>
                     ))}
 
                 </SelectContent>

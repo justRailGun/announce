@@ -80,7 +80,7 @@ const {data : session} = useSession()
                     className="resize-none min-w-80"
                     {...formField} 
                   />
-                    : field.toString().toLowerCase()==='size' || field.toString().toLowerCase()==='category' || field.toString().toLowerCase()==='type' ? <>
+                    : field.toString().toLowerCase()==='size' || field.toString().toLowerCase()==='sub-category' || field.toString().toLowerCase()==='category' || field.toString().toLowerCase()==='type' ? <>
                         <Select>
                         <SelectTrigger className="w-full">
                           <SelectValue placeholder={field.charAt(0).toUpperCase() + field.slice(1)} />

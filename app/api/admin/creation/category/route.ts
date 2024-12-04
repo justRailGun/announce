@@ -31,7 +31,7 @@ export async function POST(req: Request){
                 {status: 400})
         }
 
-        const newCategory = await Category.create({name, slug});
+        const newCategory = await Category.create({...validatedData.data, slug});
         return NextResponse.json({success: true, data: newCategory}, {status: 201})
     }catch(error){
         throw new Error("Internal Server Error", {cause: error})

@@ -7,10 +7,11 @@ import Image from 'next/image'
 import SheetMenu from '../SheetMenu'
 import LocalSearch from '../search/LocalSearch'
 import { Plus,LogOut, LogIn , ShoppingCart} from 'lucide-react'
-import ModalTrigger from '../Modal'
+// import ModalTrigger from '../Modal'
 import { useSession } from 'next-auth/react'
 import { Button } from '../ui/button'
 import { signOut } from 'next-auth/react'
+import ProductModal from '../ModalProduct'
 const  Navbar =  () => {
   const {data:session} = useSession()
 
@@ -31,7 +32,7 @@ const  Navbar =  () => {
               {!session? 
               <Link href={ROUTES.LOGIN} className="px-4 py-2 items-center justify-center flex gap-2">Login <LogIn size={20}/></Link> : 
               <>
-              <ModalTrigger  >Create  <Plus size={20} /></ModalTrigger>
+              <ProductModal  >Create  <Plus size={20} /></ProductModal>
               <Button onClick={()=>signOut()} className='px-4 py-2 bg-red-700 dark:text-white dark:bg-red-900'>Logout <LogOut size={20} /></Button>
               </>}
               

@@ -17,6 +17,11 @@ const baseProductSchema = new Schema({
         type:String,
         default : "/images/shoes.png"
     },
+    category:{
+        type: Schema.Types.ObjectId,
+        required:true,
+        ref : 'Category'
+    },
     subCategory:{
         type: Schema.Types.ObjectId,
         required:true,
