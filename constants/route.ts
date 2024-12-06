@@ -9,3 +9,16 @@ export const ROUTES={
     SHOPSPOST : '/api/shop/create',
     SHOPSGET :"/api/shop/"
 }
+
+
+export const CREATE_API={
+    PRODUCTS(value:string){
+        return `/api/create/${value.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`
+    },
+}
+
+export const GET_API={
+    PRODUCTS(value:string){
+        return `/api/products/${value.toLowerCase()}`
+    },
+}

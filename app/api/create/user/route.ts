@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import User from "@/database/user.model";
 import dbConnect from "@/lib/dbconnect";
-import { UserSchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 
 export async function GET() {
   try {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     await dbConnect();
     const body = await request.json();
 
-    const validatedData = UserSchema.safeParse(body);
+    const validatedData = getSchema("UserSchema").safeParse(body);
 
     if (!validatedData.success) {
       return NextResponse.json(
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     if (existingUser) {
       console.log("User already exists");
       return NextResponse.json(
-        { success: false, message: "User already exists" },
+        { success: true, message: "User already exists" },
         { status: 400 }
       );
     }

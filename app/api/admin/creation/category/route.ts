@@ -1,4 +1,4 @@
-import { CategorySchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 import Category from "@/database/category.model"
 import dbConnect from "@/lib/dbconnect";
 import { NextResponse } from "next/server";
@@ -7,7 +7,7 @@ export async function POST(req: Request){
     try{
         await dbConnect();
         const body = await req.json();
-        const validatedData = CategorySchema.safeParse(body);
+        const validatedData = getSchema("CategorySchema").safeParse(body);
         if(!validatedData.success){
             return NextResponse.json(
                 {success: false, error: "Validation failed", details: validatedData.error},

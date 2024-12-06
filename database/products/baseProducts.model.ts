@@ -17,12 +17,12 @@ const baseProductSchema = new Schema({
         type:String,
         default : "/images/shoes.png"
     },
-    category:{
-        type: Schema.Types.ObjectId,
-        required:true,
-        ref : 'Category'
-    },
-    subCategory:{
+    // category:{
+    //     type: Schema.Types.ObjectId,
+    //     required:true,
+    //     ref : 'Category'
+    // },
+    "Sub-Category":{
         type: Schema.Types.ObjectId,
         required:true,
         ref : 'SubCategory'
@@ -31,9 +31,9 @@ const baseProductSchema = new Schema({
         type: Number,
         default: 0
     },
-    user:{
-        type : Schema.Types.ObjectId, ref:'User', required:true
-    }
+    // user:{
+    //     type : Schema.Types.ObjectId, ref:'User', required:true
+    // }
 },{timestamps: true})
 
 const BaseProduct = models.BaseProduct || model('BaseProduct', baseProductSchema) 

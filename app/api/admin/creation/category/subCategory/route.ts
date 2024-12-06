@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server';
 import dbConnect from "@/lib/dbconnect";
-import {SubCategorySchema} from "@/lib/validation";
+import {getSchema} from "@/lib/validation";
 import SubCategory from "@/database/subCategory.model";
 import Category from '@/database/category.model';
 
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     try{
         await dbConnect();
-        const validatedData = SubCategorySchema.safeParse(body);
+        const validatedData = getSchema("SubCategorySchema").safeParse(body);
         if(!validatedData.success){
             return NextResponse.json(
                 {success : false , error :"Validation Failed" , details : validatedData.error}, 

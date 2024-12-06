@@ -1,51 +1,36 @@
-export const ShopDefaultValues = {
+
+
+export const defaultValues = {
+  Shop :{
     name: "",
     description: "",
     location: "",
     adress: "",
     phone: "",
   }
-  
-export const ClotheDefaultValues = {
-    name: "",
-    description: "",
-    price: "",
-    category: ["Men","Women","Kids","Baby"] ,
-    type : ["T-shirt","Sweatshirt","Jacket","Pants","Skirt","Dress","Coat","Shoes","Bag","Accessories"] ,
-    size :["XS","S","M","L","XL","XXL"],
+  ,
+ Clothes : {
+    size :"",
     color :'',
     brand :'',
     materiel :'',
   }
-
-  export const RealEstateDefaultValues = {
-    name: "",
-    description: "",
-    price: "",
-    category:["House","Apartment","Hotel","Office","School","Restaurant","Retail","Other"] ,
+,
+"Real Estate" :{
     location :'',
     bedrooms :'',
     bathrooms :'',
     surface :'',
     floors :'',
-  }
+  },
 
-  export const SmallProductDefaultValues = {
-    name: "",
-    description: "",
-    price: "",
-    category: ["Electronics","Furniture","Home Appliances","Office Supplies","Other"] ,
-    type :["phone","laptop","computer","other"] ,
+smallproduct :{
     brand :'',
     model :'',
-    state :["new","used","refurbished","old"] ,
-  }
+    state :"" ,
+  },
 
-  export const VehiculeDefaultValues = {
-    name: "",
-    description: "",
-    price: "",
-    category: ["Car","Motorcycle","Bike","Van","Truck","Other"] ,
+ Vehicule : {
     brand :'',
     model :'',
     color :'',
@@ -53,13 +38,16 @@ export const ClotheDefaultValues = {
     fuel :"",
     mileage :"",
     power :"",
-  }
-  export const FurnitureDefaultValues = {
-    name: "",
-    description: "",
-    price: "",
-    category: ["Furniture","Decor","Other"] ,
-    type :["Sofa","Table","Chair","Bed","Other"] ,
-    size : ["XS","S","M","L","XL","XXL"] ,
+  },
+
+Furniture : {
+    type :"",
+    size :"",
     materiel :''
   }
+}
+
+export const getDefaultValues = (value: keyof typeof defaultValues) => {
+    const defaultValue = defaultValues[value]
+    return defaultValue
+}

@@ -1,10 +1,10 @@
 'use client'
 import AuthForm from "@/components/forms/Form"
-import { SignInSchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 const SignIn = () => {
   
   return (
-    <AuthForm formSchema={SignInSchema} 
+    <AuthForm formSchema={getSchema("SignInSchema")} 
     defaultValues={{
       email :"",
       password :""}} 

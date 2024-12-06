@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
 import AuthForm from "@/components/forms/Form"
-import { SignUpSchema } from '@/lib/validation'
+import { getSchema } from '@/lib/validation'
 const Register = () => {
   return (
-    <AuthForm formSchema={SignUpSchema} 
+    <AuthForm formSchema={getSchema("SignUpSchema")}
     defaultValues={{
       name :"",
       username :"",

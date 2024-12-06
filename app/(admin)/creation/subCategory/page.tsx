@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {SubCategorySchema} from "@/lib/validation"
+import {getSchema} from "@/lib/validation"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -26,9 +26,11 @@ import { useEffect, useState } from "react"
 
 
 export default function ProfileForm() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const schema = getSchema("SubCategorySchema")
   // ...
-  const form = useForm<z.infer<typeof SubCategorySchema>>({
-    resolver: zodResolver(SubCategorySchema),
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(getSchema("SubCategorySchema")),
     defaultValues: {
       name:"",
       category: "",
@@ -51,7 +53,7 @@ export default function ProfileForm() {
       
       fetchCategories();
   },[])
-  async function onSubmit(values: z.infer<typeof SubCategorySchema>) {
+  async function onSubmit(values: z.infer<typeof schema>) {
     
     const res =  await fetch('/api/admin/creation/category/subCategory', {
       method: 'POST',

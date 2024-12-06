@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbconnect";
 import  RealEstate  from "@/database/products/realEstate.model";
-import { RealEstateSchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 import { NextResponse } from "next/server";
 
 
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         // Récupérer et valider les données
         const body = await request.json();
         console.log("Request body:", body); // Debug
-        const validatedData = RealEstateSchema.safeParse(body);
+        const validatedData = getSchema("ProductSchema").merge(getSchema('Real Estate')).safeParse(body);
         console.log("validatedData:", validatedData); // Debug
         if (!validatedData.success) {
             console.error("Validation errors:", validatedData.error.format());
