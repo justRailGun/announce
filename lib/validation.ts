@@ -78,7 +78,7 @@ export const schemas = {
   }),
 
   Clothes: z.object({
-    size: z.array(z.string().min(2).max(50)),
+    size: z.string().min(2).max(50),
     color: z.string().min(2).max(50),
     brand: z.string().min(2).max(50),
     materiel: z.string().min(2).max(50),

@@ -67,6 +67,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
 
         async  function  onSubmit(values: z.infer<typeof schema>) {
             values = form.getValues();
+            console.log("values:", values);
             const res =  await fetch(CREATE_API.PRODUCTS(apiCall), {
                 method: 'POST',
                 headers: {

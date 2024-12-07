@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbconnect";
 import  Clothe  from "@/database/products/clothe.model";
-import { ClothesSchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 import { NextResponse } from "next/server";
 
 
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
         // Récupérer et valider les données
         const body = await request.json();
         console.log("Request body:", body); // Debug
-        const validatedData = ClothesSchema.safeParse(body);
+        const validatedData = getSchema("ProductSchema").merge(getSchema('Clothes')).safeParse(body);
 
         if (!validatedData.success) {
             console.error("Validation errors:", validatedData.error.format());
