@@ -94,12 +94,12 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     //     form.reset(isDefaultValues);
     //   }, [isDefaultValues, form ]);
             // Form debug
-      // useEffect(() => {
-      //   const subscription = form.watch((value) => {
-      //     console.log("Form values:", value);
-      //   });
-      //   return () => subscription.unsubscribe();
-      // }, [form]);
+      useEffect(() => {
+        const subscription = form.watch((value) => {
+          console.log("Form values:", value);
+        });
+        return () => subscription.unsubscribe();
+      }, [form]);
 
 
 
