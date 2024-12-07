@@ -160,8 +160,8 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
             <DialogDescription>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div  className="grid grid-cols-2 gap-4 mt-8">
-                {Object.keys(isDefaultValues).map((item)=>{
+                <span  className="grid grid-cols-2 gap-4 mt-8">
+                {Object.keys(isDefaultValues).map((item,index)=>{
                     return (
                         <>
                             {item ==="category" ? 
@@ -169,7 +169,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                <FormField
                                 control={form.control}
                                 name={item}
-                                key={item}
+                                key={index}
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Category</FormLabel>
@@ -186,8 +186,8 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                {categories.map((item) => (
-                                                    <SelectItem key={item._id} value={item._id}>{item.name}</SelectItem>
+                                                {categories.map((item,index) => (
+                                                    <SelectItem key={index} value={item._id}>{item.name}</SelectItem>
                                                 ))}
                                             </SelectContent>
                                         </Select>
@@ -202,7 +202,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                 {item==="Sub-Category" ? 
                                 <>
                                     <FormField
-                                    key={item}
+                                    key={index}
                                     control={form.control}
                                     name={item}
                                     render={({ field }) => (
@@ -215,8 +215,8 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                             </SelectTrigger>
                                             </FormControl>
                                             <SelectContent  >
-                                            {arraySubCategory.map((item)=>(
-                                                <SelectItem  key={item._id} value={item._id}>{item.name}</SelectItem>
+                                            {arraySubCategory.map((item,index)=>(
+                                                <SelectItem  key={index} value={item._id}>{item.name}</SelectItem>
                                             ))}
                                             </SelectContent>
                                         </Select>
@@ -229,7 +229,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                     <FormField
                                         control={form.control}
                                         name={item}
-                                        key={item}
+                                        key={index}
                                         render={({ field }) => (
                                             <FormItem>
                                             <FormLabel>{item.charAt(0).toUpperCase() + item.slice(1)}</FormLabel>
@@ -248,7 +248,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                 })
                    
                 }
-                </div>
+                </span>
                 
         <Button type="submit" className="w-full mt-8  dark:text-white dark:!bg-green-500">Submit</Button>
       </form>
