@@ -110,8 +110,8 @@ export const schemas = {
   }),
 
   Furniture: z.object({
-    type: z.array(z.string().min(2).max(50)),
-    size: z.array(z.string().min(2).max(50)),
+    type: z.string().min(2).max(50),
+    size: z.string().min(2).max(50),
     materiel: z.string().max(50),
   }),
 
