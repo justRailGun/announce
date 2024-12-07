@@ -66,8 +66,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
 
 
         async  function  onSubmit(values: z.infer<typeof schema>) {
-          
-            values = form.getValues();console.log(values)
+            values = form.getValues();
             const res =  await fetch(CREATE_API.PRODUCTS(apiCall), {
                 method: 'POST',
                 headers: {
@@ -94,13 +93,16 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     // useEffect(() => {
     //     form.reset(isDefaultValues);
     //   }, [isDefaultValues, form ]);
+            // Form debug
+      // useEffect(() => {
+      //   const subscription = form.watch((value) => {
+      //     console.log("Form values:", value);
+      //   });
+      //   return () => subscription.unsubscribe();
+      // }, [form]);
 
-      useEffect(() => {
-        const subscription = form.watch((value) => {
-          console.log("Form values:", value);
-        });
-        return () => subscription.unsubscribe();
-      }, [form]);
+
+
     useEffect(()=>{
         const fetchCategory = async ()=>{
             const res = await fetch('api/admin/creation/category');
@@ -117,19 +119,27 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     }
     ,[])
 
-    const getValue = (value: string) => {
+    const getValue = (value: string ) => {
       return categories.find((item) => item._id === value)?.name;
     }
 
     const handleChange = (value: string) => {
+      const selectedCategory = getValue(value);
+      // set default values
+      form.reset({ ...defaultValues, ...getDefaultValues(selectedCategory) });
+      form.setValue("category", value);
+      setSchema(getSchema("ProductSchema"));
+      setIsDefaultValues(defaultValues);
+
+
+
       setArraySubCategory(subCategory.filter((item) => item.parentCategory === value));
       setCategoryIsChoosed(true);
     
       // Obtenir le nom de la catégorie
-      const selectedCategory = categories.find((item) => item._id === value)?.name;
+      
 
-      const newSchema = getSchema(selectedCategory);
-      setSchema(newSchema.merge(getSchema("Real Estate")));
+      setSchema(getSchema(selectedCategory).merge(schema));
     
       const newDefaults = { ...defaultValues, ...getDefaultValues(selectedCategory || "") };
       setIsDefaultValues(newDefaults);
@@ -148,7 +158,8 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
             <DialogTitle>Create Product</DialogTitle>
             <DialogDescription>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 space-y-6">
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div  className="grid grid-cols-2 gap-4 mt-8">
                 {Object.keys(isDefaultValues).map((item)=>{
                     return (
                         <>
@@ -164,13 +175,12 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                         <Select
                                             defaultValue={getValue(item)}
                                             onValueChange={(value) => {
-                                                field.value=value;
                                                 field.onChange(value);
                                                 handleChange(value);
                                             }}
                                         >
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="bg-gray-900">
                                                     <SelectValue placeholder="Select a Category" />
                                                 </SelectTrigger>
                                             </FormControl>
@@ -195,17 +205,17 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                     control={form.control}
                                     name={item}
                                     render={({ field }) => (
-                                        <FormItem>
+                                        <FormItem >
                                         <FormLabel>Sub-Category</FormLabel>
-                                        <Select disabled={!isCategoryChoosed} onValueChange={field.onChange}>
+                                        <Select  disabled={!isCategoryChoosed} onValueChange={field.onChange}>
                                             <FormControl>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a Sub-Category" />
+                                            <SelectTrigger className="bg-gray-900">
+                                                <SelectValue  placeholder="Select a Sub-Category" />
                                             </SelectTrigger>
                                             </FormControl>
-                                            <SelectContent>
+                                            <SelectContent  >
                                             {arraySubCategory.map((item)=>(
-                                                <SelectItem key={item._id} value={item._id}>{item.name}</SelectItem>
+                                                <SelectItem  key={item._id} value={item._id}>{item.name}</SelectItem>
                                             ))}
                                             </SelectContent>
                                         </Select>
@@ -223,7 +233,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                             <FormItem>
                                             <FormLabel>{item.charAt(0).toUpperCase() + item.slice(1)}</FormLabel>
                                             <FormControl>
-                                                <Input placeholder={item} {...field} />
+                                                <Input className="bg-gray-900" placeholder={item.charAt(0).toUpperCase() + item.slice(1)} {...field} />
                                             </FormControl>
                                             <FormMessage />
                                             </FormItem>
@@ -237,7 +247,9 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                 })
                    
                 }
-        <Button type="submit">Submit</Button>
+                </div>
+                
+        <Button type="submit" className="w-full mt-8  dark:text-white dark:!bg-green-500">Submit</Button>
       </form>
     </Form>
             </DialogDescription>
