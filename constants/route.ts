@@ -13,12 +13,12 @@ export const ROUTES={
 
 export const CREATE_API={
     PRODUCTS(value:string){
-        return `/api/create/${value.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`
+        return `http://localhost:3000/api/create/${value.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '')}`
     },
 }
 
 export const GET_API={
     PRODUCTS(value:string){
-        return `/api/products/${value.toLowerCase()}`
+        return `http://localhost:3000/api/products/${value.toLowerCase()}`
     },
 }
