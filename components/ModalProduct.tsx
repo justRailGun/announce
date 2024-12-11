@@ -44,20 +44,17 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     const [isCategoryChoosed, setCategoryIsChoosed] = useState<boolean>(false)
     const [apiCall , setApiCall] = useState("") ; 
     const {toast} = useToast()
-    const [isDefaultValues, setIsDefaultValues] = useState({ 
-        category :"" ,
-        "Sub-Category" : "",
-        name : "",        
-        price: "",
-        description : "",
-    })
-    const defaultValues =  {
+    const defaultValues :Record<
+    "category" | "Sub-Category" | "name" | "price" | "description",
+    string> =  {
         category :"",
         "Sub-Category" : "",
         name : "",        
         price: "",
         description : "",
         }
+    const [isDefaultValues, setIsDefaultValues] = useState(defaultValues) ;
+    
 
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
@@ -120,9 +117,14 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     }
     ,[])
 
-    const getValue = (value: string ) => {
-      return categories.find((item) => item._id === value)?.name;
-    }
+    const getValue = (value: string): "Clothes" | "Shop" | "Real Estate" | "Vehicule" | "Furniture" => {
+      const category = categories.find((item) => item._id === value);
+      if (category && ["Clothes", "Shop", "Real Estate", "Vehicule", "Furniture"].includes(category.name)) {
+        return category.name as "Clothes" | "Shop" | "Real Estate" | "Vehicule" | "Furniture";
+      }
+      return "Clothes"; // Valeur par défaut
+    };
+    
 
     const handleChange = (value: string) => {
       const selectedCategory = getValue(value);
@@ -140,7 +142,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
       // Obtenir le nom de la catégorie
       
 
-      setSchema(getSchema(selectedCategory).merge(schema));
+setSchema(getSchema(selectedCategory as "SignInSchema" | "SignUpSchema" | "ShopSchema" | "ProductSchema" | "CategorySchema" | "SubCategorySchema" | "Clothes" | "Small Product" | "Real Estate" | "Vehicule" | "Furniture" | "UserSchema").merge(schema));
     
       const newDefaults = { ...defaultValues, ...getDefaultValues(selectedCategory || "") };
       setIsDefaultValues(newDefaults);
@@ -228,7 +230,7 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
                                 <>
                                     <FormField
                                         control={form.control}
-                                        name={item}
+                                        name={item as 'name'}
                                         key={index}
                                         render={({ field }) => (
                                             <FormItem>

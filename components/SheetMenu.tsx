@@ -12,7 +12,6 @@ import { Button } from './ui/button'
 import Link from 'next/link'
 
 import { ROUTES } from '@/constants/route'
-// import { arrayCategory, categoryItems } from '@/constants/Category'
 import {  useSession, signOut } from 'next-auth/react'
 import getIcons from '@/constants/icons'
 import { useQueryState } from 'nuqs'
@@ -170,9 +169,9 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode, isMenu
                             <span className='bg-zinc-300 w-16 h-1'></span>
                           </span>
                       
-                          {dataCategory!.map((item, index) => (
+                          {dataCategory!.map((item) => (
                             <SidebarSection
-                              key={index}
+                              key={item._id}
                               category={item}
                             />
                           ))}

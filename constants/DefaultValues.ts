@@ -1,5 +1,3 @@
-
-
 export const defaultValues = {
   Shop :{
     name: "",
@@ -24,11 +22,11 @@ export const defaultValues = {
     floors :'',
   },
 
-smallproduct :{
-    brand :'',
-    model :'',
-    state :"" ,
-  },
+// smallproduct :{
+//     brand :'',
+//     model :'',
+//     state :"" ,
+//   },
 
  Vehicule : {
     brand :'',
