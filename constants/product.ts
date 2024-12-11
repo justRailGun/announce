@@ -1,3 +1,4 @@
+
 export const PRODUCTS = [
     // Electronics & Computers
     {
@@ -449,9 +450,19 @@ export const PRODUCTS = [
 
 export interface Product {
     name: string;
+    category : {
+        name : string ;
+        slug : string ; 
+        id: string ; 
+    } ;
+    "Sub-Category" : {
+        name : string ;
+        slug : string ;
+        id : string ; 
+    } ;
     description: string;
     price: number;
-    rating: number;
-    numberOfRatings: number;
-    imageURL: string;  // or `string[]` if it’s an array of URLs
+    rating?: number;
+    numberOfRatings?: number;
+    image: string;  // or `string[]` if it’s an array of URLs
   }

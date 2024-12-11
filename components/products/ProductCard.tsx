@@ -10,13 +10,13 @@ import React from 'react'
 import Tags from "./Tags";
 
 export default function ProductCard({product} : {product: Product}) {
-    const {name,imageURL,price,rating,numberOfRatings} = product
+    const {name,image,price,rating,numberOfRatings} = product
     const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium'
   return (
     <Card className="w-[350px]  min-h-[400px] overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className=" h-56 overflow-hidden">
         <img
-          src={imageURL+'.png'}
+          src={image}
           alt="Product Image"
           className="w-full h-full object-contain bg-dark-200 transition-transform duration-300 hover:scale-105"
         />

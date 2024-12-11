@@ -31,6 +31,14 @@ const baseProductSchema = new Schema({
         type: Number,
         default: 0
     },
+    numberOfRatings :{
+        type : Number,
+        default : 0
+    },
+    rating : {
+        type : Number, 
+        default :0 ,
+    }
     // user:{
     //     type : Schema.Types.ObjectId, ref:'User', required:true
     // }

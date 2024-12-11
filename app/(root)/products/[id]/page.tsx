@@ -8,7 +8,7 @@ import { Heart, ShoppingCart, CircleDollarSign   } from 'lucide-react'
 import { Rating } from "@mui/material"
 import StarIcon from '@mui/icons-material/Star';
 import {use , useEffect, useState} from 'react'
-import { Skeleton } from "@/components/ui/skeleton"
+import SkeletonCard from "@/components/Skeleton/SkeletonCard"
 
  function ProductDetails( {product  } : { 
     product : Product,
@@ -44,17 +44,6 @@ import { Skeleton } from "@/components/ui/skeleton"
   )
 }
 
-function SkeletonCard() {
-  return (
-    <div className="flex flex-col space-y-3">
-      <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-[250px]" />
-        <Skeleton className="h-4 w-[200px]" />
-      </div>
-    </div>
-  )
-}
 
 
 
