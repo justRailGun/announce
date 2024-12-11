@@ -9,13 +9,6 @@ export const CATEGORY ={
      book:'Books & Media',
 }
 
-export const arrayCategory: Array<"Real Estate" | "Clothing" | "Product" | "Vehicule" | "Furniture"> = [
-     "Real Estate",
-     "Clothing",
-     "Product",
-     "Vehicule",
-     "Furniture"
-   ];
 import { Building, Home, Store , Car, Truck, Bike,Footprints ,SendToBack, Luggage, Briefcase, Shirt, Sofa, BedSingle, Armchair } from "lucide-react";
 
 export const categoryItems : Record<

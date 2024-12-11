@@ -453,12 +453,13 @@ export interface Product {
     category : {
         name : string ;
         slug : string ; 
-        id: string ; 
+        _id: string ; 
     } ;
     "Sub-Category" : {
         name : string ;
         slug : string ;
-        id : string ; 
+        _id : string ; 
+        parentCategory : string ;
     } ;
     description: string;
     price: number;

@@ -19,7 +19,6 @@ const Store = () => {
         if (!res.ok) throw new Error('Failed to fetch product data');
         const data = await res.json();
         setProduit(data.data);
-         console.log(data.data) 
       } catch (error) {
         console.error('Error fetching product:', error);
       } finally {
