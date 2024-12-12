@@ -16,4 +16,5 @@ export interface Product {
     rating?: number;
     numberOfRatings?: number;
     image: string;  // or `string[]` if it’s an array of URLs
+    _id : string ;
   }

@@ -103,12 +103,12 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
 
     useEffect(()=>{
         const fetchCategory = async ()=>{
-            const res = await fetch('api/admin/creation/category');
+            const res = await fetch('http://localhost:3000/api/admin/creation/category');
             const data = await res.json();
             setCategories(data.data);
         }
         const fetchSubCategory = async ()=>{
-            const res = await fetch('api/admin/creation/category/subCategory');
+            const res = await fetch('http://localhost:3000/api/admin/creation/category/subCategory');
             const data = await res.json();
             setSubCategory(data.data);
         }

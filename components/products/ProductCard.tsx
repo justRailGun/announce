@@ -7,10 +7,9 @@ import Rating from '@mui/material/Rating';
 import Image from "next/image";
 import Link from "next/link";
 import React from 'react'
-import Tags from "./Tags";
 
 export default function ProductCard({product} : {product: Product}) {
-    const {name,image,price,rating,numberOfRatings} = product
+    const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory} = product;
     const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium'
   return (
     <Card className="w-[350px]  min-h-[400px] overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -24,7 +23,7 @@ export default function ProductCard({product} : {product: Product}) {
       <CardContent className="p-4 justify-between h-[calc(100%-224px)] flex-col flex">
         <div>
           <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
-           <div className="flex justify-between items-center"><p className="mb-2 text-sm text-dark200_light800">Samsung</p> <Tags /> </div>{/* Adding the brand later */}
+           <div className="flex justify-between items-center"><p>{category.name}</p><p className="mb-2 text-sm text-dark200_light800">{subCategory.name}</p></div>
           <div className="flex justify-between items-center">
             <span className="text-lg font-bold text-green-600">${price}</span>
             <div className="flex items-center">
@@ -36,7 +35,7 @@ export default function ProductCard({product} : {product: Product}) {
           </div>
         </div>
         <div className="flex justify-between items-center gap-2">
-          <Link className={btnClassName +' btn-tertiary'} href={"/products/"+name}>More Details
+          <Link className={btnClassName +' btn-tertiary'} href={"/products/"+_id}>More Details
           <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
           </Link>
           <button className={btnClassName +" btn-secondary"}>

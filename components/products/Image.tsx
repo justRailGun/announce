@@ -10,7 +10,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { PRODUCTS } from "@/constants/product";
 
 const ImageSlider = () => {
   const [api, setApi] = React.useState<CarouselApi>()
@@ -20,7 +19,6 @@ const ImageSlider = () => {
     if (!api) {
       return
     }
- 
     setCount((api.scrollSnapList().length)/3)
     setCurrent(Math.round((api.selectedScrollSnap() + 1)/3))
  
@@ -28,17 +26,18 @@ const ImageSlider = () => {
       setCurrent(Math.round((api.selectedScrollSnap() + 1)/3))
     })
   }, [api])
- 
+  const images = ['/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes','/images/shoes']
+
   return (
-  <div suppressHydrationWarning className="">
-            <Carousel className="" setApi={setApi} opts={{align:"center", loop:true}}>
+  <div suppressHydrationWarning>
+            <Carousel setApi={setApi} opts={{align:"center", loop:true}}>
               <CarouselContent>
-                {PRODUCTS.map((product, index) => (
+                {images.map((product, index) => (
                   <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-square items-center justify-center p-6">
-                          <img src={product.imageURL+".png"} width={200} height={200} alt={product.name} className="object-contain w-full" />
+                          <img src={product+".png"} width={200} height={200} alt={product} className="object-contain w-full" />
                         </CardContent>
                       </Card>
                     </div>

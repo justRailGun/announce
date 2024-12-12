@@ -8,7 +8,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
     const { id } =  await params;
     console.log("Request params ID:", id); // Debug
 
-    const product = await BaseProduct.findById(id).populate('Sub-Category', "category");
+    const product = await BaseProduct.findById(id).populate(['Sub-Category', "category"]);
     if (!product) {
       return NextResponse.json({ success: false, message: "Product not found" }, { status: 404 });
     }

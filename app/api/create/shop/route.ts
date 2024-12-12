@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbconnect";
 import  Shop  from "@/database/shop.model";
-import { ShopSchema } from "@/lib/validation";
+import { getSchema } from "@/lib/validation";
 import { NextResponse } from "next/server";
 
 
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
       console.log("Extracted userId:", userId);
   
       // Validate the received body
-      const validatedData = ShopSchema.safeParse(body);
+      const validatedData = getSchema("ShopSchema").safeParse(body);
   
       if (!validatedData.success) {
         console.error("Validation errors:", validatedData.error.format());

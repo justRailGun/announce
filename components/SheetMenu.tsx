@@ -33,7 +33,6 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode, isMenu
         const res = await fetch(`http://localhost:3000/api/category`);
         const data = await res.json();
         setDataCategory(data)
-        console.log(data)
       }
       catch(error){
         console.log(error)
@@ -47,7 +46,6 @@ const SheetMenu = ({trigger , isMenu =false} : {trigger: React.ReactNode, isMenu
         const res = await fetch(`http://localhost:3000/api/subcategory`);
         const data = await res.json();
         setDataSubCategory(data)
-        console.log(data)
       }
       catch(error){
         console.log(error)

@@ -5,8 +5,11 @@ export const defaultValues = {
     location: "",
     adress: "",
     phone: "",
-  }
-  ,
+  },
+  Comment :{
+    context :"" , 
+    rating : 0,
+  },
  Clothes : {
     size :"",
     color :'',

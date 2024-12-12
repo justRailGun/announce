@@ -120,6 +120,10 @@ export const schemas = {
     email: z.string().min(2),
     image: z.string().min(2),
   }),
+  CommentSchema : z.object({
+    content : z.string().min(2).max(500),
+    rating : z.string().min(0.5).max(5),
+  }),
 };
 
 // Fonction pour obtenir dynamiquement un schéma
