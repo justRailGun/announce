@@ -3,13 +3,12 @@ import dbConnect from "@/lib/dbconnect";
 import  Comment  from "@/database/comment.model";
 
 
-export const GET = async (_ : Request, {params} : {params : {id : string}}) => {
+export const GET = async (_ : Request, context: { params: { id: string } }) => {
   try {
       await dbConnect();
-      const id = await params.id;
-      const comments = await Comment.find({
-          author: id
-      }).populate('creator');
+      const { id } = await context.params;
+      const comments = await Comment.find({product: id}).populate("author");
+
       return new Response(JSON.stringify(comments), {
           status: 200,
           headers: {
