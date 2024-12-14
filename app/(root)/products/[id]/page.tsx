@@ -9,13 +9,13 @@ import StarIcon from '@mui/icons-material/Star';
 import {use , useEffect, useState} from 'react'
 import SkeletonCard from "@/components/Skeleton/SkeletonCard"
 import CommentSection from "@/components/products/CommentSection"
+import SimilarProducts from "@/components/products/SimilarProduct"
 
  function ProductDetails( {product } : { 
     product : Product,
    }) {
   const {  name, description , price,numberOfRatings, rating , category , "Sub-Category" : SubCategory} = product
   
-
   return (
     <div className="w-full container p-2 mx-auto">
       <div className="flex flex-col gap-8 md:gap-4 items-start">
@@ -83,6 +83,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
       <ImageSlider />
       <ProductDetails product={produit} />
       <CommentSection id={id}/>
+      <SimilarProducts id={id}/>
     </>
   );
 }

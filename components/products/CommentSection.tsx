@@ -100,7 +100,9 @@ const CommentSection =  ( { id } :  { id: string } )  => {
         try {
           const res = await fetch(`/api/products/${id}/comments`);
           const data = await res.json();
-          setComments(data);
+          if(res.ok){ 
+            setComments(data);
+          }
         }
         catch(error) {
           console.error('Error fetching comments:', error);

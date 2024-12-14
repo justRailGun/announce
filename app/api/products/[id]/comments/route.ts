@@ -8,13 +8,21 @@ export const GET = async (_ : Request, context: { params: { id: string } }) => {
       await dbConnect();
       const { id } = await context.params;
       const comments = await Comment.find({product: id}).populate("author");
-
-      return new Response(JSON.stringify(comments), {
+      if(comments){
+        return new Response(JSON.stringify(comments), {
           status: 200,
           headers: {
               'Content-Type': 'application/json'
           }
       })
+      }
+      else return new Response(JSON.stringify("No comments yet be the first"),{
+          status: 200,
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      })
+      
   } catch (error) {
       return new Response(JSON.stringify(error), {
           status: 500,
