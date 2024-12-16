@@ -9,7 +9,6 @@ export const GET = async (_ : Request, context: { params: { id: string } }) => {
       const { id } = await context.params;
      
       const product = await baseProduct.findById(id);
-      
       if(!product){
         return new Response(JSON.stringify("No Products yet!"),{
           status: 200,
@@ -17,8 +16,8 @@ export const GET = async (_ : Request, context: { params: { id: string } }) => {
               'Content-Type': 'application/json'
           }
       })}
-
-      const similarProducts = await baseProduct.find({__t: product.__t, _id: { $ne: product._id }}).limit(4);
+// 
+      const similarProducts = await baseProduct.find({category: product.category, _id: { $ne: product._id }}).limit(4);
       if(product){
         return new Response(JSON.stringify(similarProducts), {
           status: 200,

@@ -18,3 +18,6 @@ const commentSchema = new Schema({
 const Comment = models.Comment || model('Comment', commentSchema)
 
 export default Comment
+
+
+

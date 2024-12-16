@@ -35,7 +35,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         
             if (!res.ok) {
               console.error("Failed to create user:", await res.json());
-              return false;
+              return true;
             }
             return true;
           } catch (error) {

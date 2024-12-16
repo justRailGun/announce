@@ -31,16 +31,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const { email } = validatedData.data;
+    const { email} = body;
 
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      console.log("User already exists");
-      return NextResponse.json(
-        { success: true, message: "User already exists" },
-        { status: 400 }
-      );
-    }
+    if (existingUser) throw new Error("User already exists");
 
     const newUser = await User.create(validatedData.data);
 
