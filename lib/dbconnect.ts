@@ -1,16 +1,53 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
+// import logger from "./logger";
 
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
-
-const dbConnect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI as string);
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    throw error;
-  }
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI is not defined");
 }
 
-export default dbConnect
+interface MongooseCache {
+  conn: Mongoose | null;
+  promise: Promise<Mongoose> | null;
+}
+
+declare global {
+  // eslint-disable-next-line no-var
+  var mongoose: MongooseCache;
+}
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+const dbConnect = async (): Promise<Mongoose> => {
+  if (cached.conn) {
+    console.log("Using existing mongoose connection");
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        dbName: "devflow",
+      })
+      .then((result) => {
+        console.log("Connected to MongoDB");
+        return result;
+      })
+      .catch((error) => {
+        console.log("Error connecting to MongoDB", error);
+        throw error;
+      });
+  }
+
+  cached.conn = await cached.promise;
+
+  return cached.conn;
+};
+
+export default dbConnect;
