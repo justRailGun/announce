@@ -24,10 +24,9 @@ import { Input } from "@/components/ui/input"
 import { getSchema } from "@/lib/validation"
 import { getDefaultValues } from "@/constants/DefaultValues";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { CREATE_API } from "@/constants/route";
+// import { CREATE_API } from "@/constants/route";
 import { useToast } from "@/hooks/use-toast";
-
-
+import { useSession } from "next-auth/react";
 
 type Category = {
     _id: string;
@@ -37,12 +36,13 @@ type Category = {
   }
 
 const ProductModal = ({children} : {children:React.ReactNode}) => {
+  const {data : session} = useSession()
     const [categories, setCategories] = useState<Category[]>([])
     const [subCategory, setSubCategory] = useState<Category[]>([])
     const [schema,setSchema] = useState(getSchema("ProductSchema"))
     const [arraySubCategory, setArraySubCategory] = useState<Category[]>([])
     const [isCategoryChoosed, setCategoryIsChoosed] = useState<boolean>(false)
-    const [apiCall , setApiCall] = useState("") ; 
+    // const [apiCall , setApiCall] = useState("") ; 
     const {toast} = useToast()
     const defaultValues :Record<
     "category" | "Sub-Category" | "name" | "price" | "description",
@@ -65,12 +65,13 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
         async  function  onSubmit(values: z.infer<typeof schema>) {
             values = form.getValues();
             console.log("values:", values);
-            const res =  await fetch(CREATE_API.PRODUCTS(apiCall), {
+            // const res =  await fetch(CREATE_API.PRODUCTS(apiCall), {
+            const res =  await fetch('http://localhost:3000/api/create/overall', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(values),
+                body: JSON.stringify({ body : values, usermail : session?.user?.email}),
               })
               if(res.ok){
                 toast({
@@ -88,9 +89,6 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
               }
             }
 
-    // useEffect(() => {
-    //     form.reset(isDefaultValues);
-    //   }, [isDefaultValues, form ]);
             // Form debug
       useEffect(() => {
         const subscription = form.watch((value) => {
@@ -99,13 +97,12 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
         return () => subscription.unsubscribe();
       }, [form]);
 
-
-
     useEffect(()=>{
         const fetchCategory = async ()=>{
             const res = await fetch('http://localhost:3000/api/admin/creation/category');
             const data = await res.json();
             setCategories(data.data);
+            
         }
         const fetchSubCategory = async ()=>{
             const res = await fetch('http://localhost:3000/api/admin/creation/category/subCategory');
@@ -117,12 +114,12 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
     }
     ,[])
 
-    const getValue = (value: string): "Clothes" | "Shop" | "Real Estate" | "Vehicule" | "Furniture" => {
+    const getValue = (value: string): "Clothe" | "Shop" | "Real Estate" | "Vehicule" | "Furniture" => {
       const category = categories.find((item) => item._id === value);
-      if (category && ["Clothes", "Shop", "Real Estate", "Vehicule", "Furniture"].includes(category.name)) {
-        return category.name as "Clothes" | "Shop" | "Real Estate" | "Vehicule" | "Furniture";
+      if (category && ["Clothe", "Shop", "Real Estate", "Vehicule", "Furniture"].includes(category.name)) {
+        return category.name as "Clothe" | "Shop" | "Real Estate" | "Vehicule" | "Furniture";
       }
-      return "Clothes"; // Valeur par défaut
+      return "Clothe"; // Valeur par défaut
     };
     
 
@@ -142,14 +139,14 @@ const ProductModal = ({children} : {children:React.ReactNode}) => {
       // Obtenir le nom de la catégorie
       
 
-setSchema(getSchema(selectedCategory as "SignInSchema" | "SignUpSchema" | "ShopSchema" | "ProductSchema" | "CategorySchema" | "SubCategorySchema" | "Clothes" | "Small Product" | "Real Estate" | "Vehicule" | "Furniture" | "UserSchema").merge(schema));
+setSchema(getSchema(selectedCategory as "SignInSchema" | "SignUpSchema" | "ShopSchema" | "ProductSchema" | "CategorySchema" | "SubCategorySchema" | "Clothe" | "Small Product" | "Real Estate" | "Vehicule" | "Furniture" | "UserSchema").merge(schema));
     
       const newDefaults = { ...defaultValues, ...getDefaultValues(selectedCategory || "") };
       setIsDefaultValues(newDefaults);
 
       
       // Mettre à jour l'API utilisée
-      setApiCall(selectedCategory || "");
+      // setApiCall(selectedCategory || "");
     };
     
       

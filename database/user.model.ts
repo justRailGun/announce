@@ -18,6 +18,11 @@ const userSchema= new Schema({
         type: String,
         default : "user",
     },
+    products :[{
+        type : Schema.Types.ObjectId,
+        ref : 'Product',
+        default : []
+    }],
 },{timestamps: true}) 
 
 const User = models.User || model('User', userSchema)

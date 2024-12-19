@@ -2,22 +2,12 @@ import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Store, ArrowLeft, Shirt, Car, Building, Package, Sofa } from "lucide-react";
 import {
-  ClothesSchema,
-  ShopSchema,
-  RealEstateSchema,
-  VehiculeSchema,
-  SmallProductSchema,
-  FurnitureSchema,
+  getSchema
 } from "@/lib/validation";
 
 
 import {
-  ClotheDefaultValues,
-  RealEstateDefaultValues,
-  ShopDefaultValues,
-  SmallProductDefaultValues,
-  VehiculeDefaultValues,
-  FurnitureDefaultValues
+  getDefaultValues
 } from "@/constants/DefaultValues";
 
 import {
@@ -48,33 +38,7 @@ export default function ModalTrigger({ children }: { children: React.ReactNode }
   }, []);
   const handleCategoryChoose = useCallback((value: CategoryKeys) => setCategoryIsChoosed(value), []);
 
-  const categoryConfig = {
-    clothes: {
-      defaultValues: ClotheDefaultValues,
-      fetchApi: "/api/create/clothe",
-      schema: ClothesSchema,
-    },
-    "real-estate": {
-      defaultValues: RealEstateDefaultValues,
-      fetchApi: "/api/create/real-estate",
-      schema: RealEstateSchema,
-    },
-    vehicle: {
-      defaultValues: VehiculeDefaultValues,
-      fetchApi: "/api/create/vehicule",
-      schema: VehiculeSchema,
-    },
-    product: {
-      defaultValues: SmallProductDefaultValues,
-      fetchApi: "/api/create/product",
-      schema: SmallProductSchema,
-    },
-    furniture : {
-      defaultValues: FurnitureDefaultValues,
-      fetchApi: "/api/create/furniture",
-      schema: FurnitureSchema,
-    }
-  };
+
 
   const selectedCategory = isCategoryChoosed ? categoryConfig[isCategoryChoosed] : null; // Étape 3
 

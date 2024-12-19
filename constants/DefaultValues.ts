@@ -10,7 +10,7 @@ export const defaultValues = {
     context :"" , 
     rating : 0,
   },
- Clothes : {
+ Clothe : {
     size :"",
     color :'',
     brand :'',
