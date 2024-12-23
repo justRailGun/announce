@@ -12,9 +12,13 @@ import { useSession } from 'next-auth/react'
 import { Button } from '../ui/button'
 import { signOut } from 'next-auth/react'
 import ProductModal from '../ModalProduct'
+import { Badge } from '../ui/badge'
+import { CartContext } from '@/app/Context/CartContext'
+import { useContext } from 'react'
 const  Navbar =  () => {
   const {data:session} = useSession()
-  console.log(session)
+  const cartContext = useContext(CartContext)
+  const cart = cartContext ? cartContext.cart : []
   return (
     <nav
     className='w-full flex z-50 fixed items-center justify-between background-light900_dark200 p-6  text-dark100_light900 dark:shadow-none'
@@ -37,8 +41,11 @@ const  Navbar =  () => {
               </>}
               
               <div className='flex items-center gap-4'>
-                <Link href={ROUTES.CART} className='btn-secondary px-4 py-2 rounded-lg flex items-center gap-2'>
+                <Link href={ROUTES.CART} className='relative btn-secondary px-4 py-2 rounded-lg flex items-center gap-2'>
                   Cart <ShoppingCart size={20} />
+                  <Badge className="absolute -top-2 -right-2 px-2 py-1 text-xs font-bold text-white rounded-full dark:bg-red-700 dark:text-white ">
+                {cart.length}
+              </Badge>
                 </Link><ModeToggle />
                           
                 <SheetMenu trigger={<Image src="/icons/hamburger.svg" className='invert-colors' width={32} height={32} alt="hamburger" />} />

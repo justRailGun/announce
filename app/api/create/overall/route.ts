@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         const newUser = await User.find({email  : usermail}).lean();
 
         console.log("User :", newUser[0]._id);
-        const newProduct = await ProductModel.create({...validatedData.data , user : newUser[0]._id});
+        const newProduct = await ProductModel!.create({...validatedData.data , user : newUser[0]._id});
         console.log("Product created:", newProduct); // Debug
 
         return NextResponse.json({ success: true, data: newProduct }, { status: 201 });

@@ -1,3 +1,4 @@
+'use client'
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 // import { Star } from 'lucide-react'
@@ -7,10 +8,14 @@ import Rating from '@mui/material/Rating';
 import Image from "next/image";
 import Link from "next/link";
 import React from 'react'
-
+import { useContext } from "react";
+import { CartContext } from "@/app/Context/CartContext";
 export default function ProductCard({product} : {product: Product}) {
+    const cartContext = useContext(CartContext)
+    const updateLength = cartContext!.updateLength ; 
     const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory} = product;
     const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium'
+
   return (
     <Card className="w-[350px]  min-h-[400px] overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className=" h-56 overflow-hidden">
@@ -25,7 +30,7 @@ export default function ProductCard({product} : {product: Product}) {
           <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
            <div className="flex justify-between items-center"><p>{category.name}</p><p className="mb-2 text-sm text-dark200_light800">{subCategory.name}</p></div>
           <div className="flex justify-between items-center">
-            <span className="text-lg font-bold text-green-600">${price}</span>
+            <span className="text-lg font-bold text-green-600">${price.toLocaleString("fr-FR")}</span>
             <div className="flex items-center">
               <div className="flex items-center">
                 <Rating name="read-only" value={rating} readOnly precision={0.1}/>
@@ -38,7 +43,7 @@ export default function ProductCard({product} : {product: Product}) {
           <Link className={btnClassName +' btn-tertiary'} href={"/products/"+_id}>More Details
           <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
           </Link>
-          <button className={btnClassName +" btn-secondary"}>
+          <button className={btnClassName +" btn-secondary"} onClick={() => {updateLength(_id);}}>
             Add to Cart <Image src="/icons/cart.svg" className='invert-colors' width={20} height={20} alt="cart" /></button>
         </div>
       </CardContent>
