@@ -6,7 +6,6 @@ export async function POST(req: Request){
     try{
         await dbConnect();
         const {cart} = await req.json();
-        console.log("received cart : ",cart)
         const products =  await BaseProduct.find({_id : {$in : cart}}).populate(["category","Sub-Category"]);
         if(!products){
             return NextResponse.json({success : false, error : "Product not found"}, {status : 404})
