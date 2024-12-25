@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react'
 import Counter from './Counter';
 import { Trash , ClipboardList} from 'lucide-react';
+import { Button } from '../ui/button';
 interface CartProduct extends Product {
     quantity: number;
 }
@@ -13,8 +14,9 @@ interface CartRowProps {
     product : CartProduct;
     plusQuantity : (id : string) => void;
     minusQuantity : (id : string) => void;
+    handleDelete : (id : string) => void;
 }
-const CartRow = ({product , plusQuantity , minusQuantity} : CartRowProps) => {
+const CartRow = ({product , plusQuantity , minusQuantity , handleDelete} : CartRowProps) => {
     const {name,image,price ,description, _id, category,"Sub-Category" : subCategory} = product;
 
   return (
@@ -39,8 +41,8 @@ const CartRow = ({product , plusQuantity , minusQuantity} : CartRowProps) => {
                 <h2 className='text-lg '>${(price*product.quantity).toLocaleString("fr-FR")}</h2>
                 <div className='flex w-full gap-4 justify-end items-center'>
                     <div className='flex ml-4 gap-8 items-center justify-start md:mr-4 md:justify-end w-full'>
-                        <ClipboardList opacity={0.6} size={32}/> 
-                        <Trash opacity={0.6} size={32}/>
+                        <Button className='px-4 py-2 bg-blue-500 hover:bg-blue-600'><ClipboardList size={32}/> </Button>
+                        <Button className='px-4 py-2 bg-red-600 hover:bg-red-700' onClick={()=>handleDelete(_id)}><Trash size={32}/> </Button>
                     </div>
                     
                     <Counter

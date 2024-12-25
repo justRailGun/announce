@@ -23,9 +23,10 @@ interface productPage extends Product {
 const Page = () => {
     const cartContext = useContext(CartContext);
     const cart = useMemo(() => cartContext ? cartContext.cart : [], [cartContext]);
+    const setCart = cartContext!.setCart;
     const [loading, setLoading] = useState<boolean>(true);
     const [products, setProducts] = useState<productPage[] | null>(null);
-
+    
     useEffect(() => {
         const getProducts = async () => {
             const res = await fetch("http://localhost:3000/api/products/cart", {
@@ -80,12 +81,15 @@ const Page = () => {
             )
         );
     };
-
+    const handleDelete = (_id: string) => {
+        setProducts((prev) => prev!.filter((product) => product._id !== _id));
+        setCart((prev) => prev.filter((item) => item !== _id));
+    };
     return (
         <main className="container mx-auto gap-4 flex flex-col lg:flex-row pt-24 min-h-screen">
             <div>
                 {products.map((product)=>(
-                <CartRow key={product._id} product={product} plusQuantity={plusQuantity} minusQuantity={minusQuantity}/>
+                <CartRow key={product._id} product={product} plusQuantity={plusQuantity} minusQuantity={minusQuantity} handleDelete={handleDelete}/>
             ))}
             </div>
             <div className="flex w-full justify-center bg-red-500">
