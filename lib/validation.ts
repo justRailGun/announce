@@ -122,7 +122,21 @@ export const schemas = {
   }),
   CommentSchema : z.object({
     content : z.string().min(2).max(500),
-    rating : z.string().min(0.5).max(5),
+    rating: z.number().min(0.5).max(5), 
+  }),
+  ShippingSchema : z.object({
+    "User Information": z.object({
+      name: z.string().min(2).max(50),
+      email: z.string().email(), 
+      phone: z.string().min(10).max(15), 
+    }),
+    "Shipping Adress": z.object({
+      country: z.string().min(2).max(50),
+      city: z.string().min(2).max(50),
+      address: z.string().min(2).max(100),
+      "Zip Code": z.string().min(2).max(10), 
+    }),
+    "Delivery-Instructions": z.string().min(2).max(500),
   }),
 };
 

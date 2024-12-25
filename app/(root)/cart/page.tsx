@@ -16,6 +16,7 @@ import { Product } from "@/constants/product";
 // import Image from "next/image";
 // import { Rating } from "@mui/material";
 import CartRow from "@/components/Cart/CartRow";
+import ShippingForm from "@/components/Cart/ShippingForm";
 interface productPage extends Product {
     quantity: number;
 }
@@ -53,7 +54,6 @@ const Page = () => {
             setLoading(false);
         }
     }, [cart]);
-
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -85,6 +85,7 @@ const Page = () => {
         setProducts((prev) => prev!.filter((product) => product._id !== _id));
         setCart((prev) => prev.filter((item) => item !== _id));
     };
+    
     return (
         <main className="container mx-auto gap-4 flex flex-col lg:flex-row pt-24 min-h-screen">
             <div>
@@ -92,8 +93,8 @@ const Page = () => {
                 <CartRow key={product._id} product={product} plusQuantity={plusQuantity} minusQuantity={minusQuantity} handleDelete={handleDelete}/>
             ))}
             </div>
-            <div className="flex w-full justify-center bg-red-500">
-
+            <div className="flex w-full justify-center">
+                <ShippingForm products={products}/>
             </div>
         </main>
     );

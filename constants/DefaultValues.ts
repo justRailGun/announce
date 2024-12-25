@@ -6,9 +6,9 @@ export const defaultValues = {
     adress: "",
     phone: "",
   },
-  Comment :{
-    context :"" , 
-    rating : 0,
+  Comment: {
+    context: "",
+    rating: "0",
   },
  Clothe : {
     size :"",
@@ -45,7 +45,21 @@ Furniture : {
     type :"",
     size :"",
     materiel :''
-  }
+  }, 
+  ShippingForm :{
+    "User Information" :{
+      name : "",
+      email :"" ,
+      phone : "",
+    },
+    "Shipping Adress" :{
+      country : "",
+      city : "",
+      address : "",
+      "Zip Code" : "",
+  },
+  "Delivery-Instructions" : "",
+  }, 
 }
 
 export const getDefaultValues = (value: keyof typeof defaultValues) => {
