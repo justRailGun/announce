@@ -9,6 +9,7 @@ import Furniture from "./products/furniture.model"
 import Clothe from "./products/clothe.model"
 import RealEstate from "./products/realEstate.model"
 import Vehicule from "./products/vehicule.model"
+import Transaction from "./transaction.model"
 export {
     Category ,
     SubCategory ,
@@ -20,19 +21,21 @@ export {
     Clothe,
     RealEstate,
     Vehicule,
+    Transaction,
 }
 
 export const getSchemaModel = (value : string) =>{
     switch (value.toLowerCase().replaceAll(" ", "")) {
-        case "CategorySchema" : return Category
-        case "SubCategorySchema" : return SubCategory
+        case "categoryschema" : return Category
+        case "subcategoryschema" : return SubCategory
         case "comment" : return Comment
-        case "UserSchema" : return User
-        case "ShopSchema" : return Shop
+        case "userschema" : return User
+        case "shopschema" : return Shop
         case "furniture" : return Furniture
         case "clothe" : return Clothe
         case "realestate" : return RealEstate
         case "vehicule" : return Vehicule
+        case "transaction" : return Transaction
         default : return null
     }
 }

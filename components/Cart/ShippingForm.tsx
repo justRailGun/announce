@@ -17,6 +17,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { getSchema } from '@/lib/validation';
 import { getDefaultValues } from '@/constants/DefaultValues';
+import { useToast } from '@/hooks/use-toast';
+import { redirect } from 'next/navigation';
 interface ShippingFormProps {
     products: Product[];
   }
@@ -25,13 +27,36 @@ const ShippingForm =  ({products} : ShippingFormProps) => {
     const formDefaultValues = getDefaultValues("ShippingForm")
     const {data:session} = useSession()
     const totalCost = products.reduce((acc, product) => acc + product.price * product.quantity, 0);
-
+    const { toast } = useToast()
     const form = useForm<z.infer<typeof ShippingSchema>>({
         resolver: zodResolver(ShippingSchema),
         defaultValues: formDefaultValues as z.infer<typeof ShippingSchema>});
          
     async function onSubmit(values: z.infer<typeof ShippingSchema>) {
-        
+        const res = await fetch('http://localhost:3000/api/cart', {
+          method :  "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({body:values, user : session?.user , totalCost : totalCost , products : products}),
+        })
+        if(res.ok){
+          const responseBody = await res.json(); // Parse the response body
+          const id = responseBody._id 
+          const userID = responseBody.userId 
+          redirect(`http://localhost:3000/user/${userID}/transaction/${id}`)
+          toast({
+            title : "Shipping Form Submitted",
+            description : "Your Shipping Form has been submitted",
+          })
+          redirect(`/cart/${id}/${userID}`)
+        }else{
+          toast({
+            title : "Error",
+            description : "Something went wrong",
+            variant: "destructive",
+          })
+        }
         console.log("values",{...values})
         
       }
@@ -54,7 +79,7 @@ const ShippingForm =  ({products} : ShippingFormProps) => {
                 <FormField
                   key={subKey}
                   control={form.control}
-                  name={`${key}.${subKey}` as "name"} // Correct path for nested fields
+                  name={`${key}.${subKey}` as "name"}
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
@@ -92,9 +117,13 @@ const ShippingForm =  ({products} : ShippingFormProps) => {
         );
       }
     })}
+    <div className='py-2 border px-4 rounded-lg'>
+      <h1 className="text-2xl font-SpaceGrotesk text-black/60">Total Cost: ${totalCost.toLocaleString("fr-FR")}</h1>
+    </div>
     <Button type="submit" className="w-full mt-8">
       Submit
     </Button>
+    
   </form>
 </Form>
 

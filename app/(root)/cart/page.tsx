@@ -93,7 +93,7 @@ const Page = () => {
                 <CartRow key={product._id} product={product} plusQuantity={plusQuantity} minusQuantity={minusQuantity} handleDelete={handleDelete}/>
             ))}
             </div>
-            <div className="flex w-full justify-center">
+            <div className="flex w-full h-full justify-center">
                 <ShippingForm products={products}/>
             </div>
         </main>
