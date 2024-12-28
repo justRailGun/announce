@@ -2,35 +2,20 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Product } from "@/constants/product"
 import { PrinterIcon } from 'lucide-react'
 
-// This would typically come from your order processing system
-const invoiceData = {
-  invoiceNumber: "INV-001",
-  date: "2023-06-15",
-  dueDate: "2023-07-15",
-  customerName: "John Doe",
-  customerEmail: "john.doe@example.com",
-  customerAddress: "123 Main St, Anytown, AN 12345",
-  items: [
-    { id: 1, name: "Product A", quantity: 2, price: 19.99 },
-    { id: 2, name: "Product B", quantity: 1, price: 29.99 },
-    { id: 3, name: "Product C", quantity: 3, price: 9.99 },
-  ],
-  subtotal: 99.94,
-  tax: 8.00,
-  total: 107.94,
-}
-
 export default async function InvoicePage({params } : {params : Promise<{ slug: string, id : string }>} ) {
+
     const {slug} = await params
-    console.log("slug",slug)
     const res  = await fetch(`http://localhost:3000/api/transaction/${slug}`)
     const data = await res.json()
-    console.log("data",data.data)
     const userInformation = data.data['User Information']
     const shippingAddress = data.data['Shipping Adress']
-    console.log("user :",userInformation)
+    const products = data.data['products']
+    const quantity = data.data['quantity']
+    const total = products.reduce((acc : number , curr : Product , index: number )=> acc + curr.price * quantity[index] , 0)
+    const date = new Date(data.data.createdAt).toISOString().split("T")[0]
   return (
     <div className="container mx-auto pt-24">
       <Card className="w-full max-w-4xl mx-auto">
@@ -50,8 +35,8 @@ export default async function InvoicePage({params } : {params : Promise<{ slug: 
             </div>
             <div className="text-right">
               <p><span className="font-semibold">Invoice Number: </span> INV-001</p>
-              <p><span className="font-semibold">Date:</span> {invoiceData.date}</p>
-              <p><span className="font-semibold">Due Date:</span> {invoiceData.dueDate}</p>
+              <p><span className="font-semibold">Date: </span> {date}</p>
+              <p><span className="font-semibold">Due Date:</span> {date}</p>
             </div>
           </div>
           <Table>
@@ -64,12 +49,12 @@ export default async function InvoicePage({params } : {params : Promise<{ slug: 
               </TableRow>
             </TableHeader>
             <TableBody>
-              {invoiceData.items.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="text-right">{item.quantity}</TableCell>
-                  <TableCell className="text-right">${item.price.toFixed(2)}</TableCell>
-                  <TableCell className="text-right">${(item.quantity * item.price).toFixed(2)}</TableCell>
+              {products.map((product : Product, index : number) => (
+                <TableRow key={product._id}>
+                  <TableCell>{product.name}</TableCell>
+                  <TableCell className="text-right">{quantity[index]}</TableCell>
+                  <TableCell className="text-right">${product.price.toFixed(2)}</TableCell>
+                  <TableCell className="text-right">${(quantity[index] * product.price).toFixed(2)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -77,16 +62,16 @@ export default async function InvoicePage({params } : {params : Promise<{ slug: 
           <div className="mt-6 space-y-2">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>${invoiceData.subtotal.toFixed(2)}</span>
+              <span>${(total*0.19).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
               <span>Tax</span>
-              <span>${invoiceData.tax.toFixed(2)}</span>
+              <span>${(total-total*0.19).toFixed(2)}</span>
             </div>
             <Separator />
             <div className="flex justify-between font-semibold">
               <span>Total</span>
-              <span>${invoiceData.total.toFixed(2)}</span>
+              <span>${total.toFixed(2)}</span>
             </div>
           </div>
         </CardContent>

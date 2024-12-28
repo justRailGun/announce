@@ -44,12 +44,11 @@ const ShippingForm =  ({products} : ShippingFormProps) => {
           const responseBody = await res.json(); // Parse the response body
           const id = responseBody._id 
           const userID = responseBody.userId 
-          redirect(`http://localhost:3000/user/${userID}/transaction/${id}`)
           toast({
             title : "Shipping Form Submitted",
             description : "Your Shipping Form has been submitted",
           })
-          redirect(`/cart/${id}/${userID}`)
+          redirect(`http://localhost:3000/user/${userID}/transaction/${id}`)
         }else{
           toast({
             title : "Error",

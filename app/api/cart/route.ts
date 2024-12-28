@@ -10,9 +10,10 @@ export async function POST(req : Request) {
         const {body , user , totalCost , products} = await req.json();
         const validatedData = getSchema("ShippingSchema").safeParse(body);
         const newUser = await getSchemaModel("userschema")!.findOne({email : user.email});
-        console.log("validatedData :", validatedData.data);
         const productsId = products.map((product : Product) => product._id);
-        const transaction = await getSchemaModel("transaction")!.create({...validatedData.data , userId : newUser._id, totalCost : totalCost , products : productsId});
+        const quantity = products.map((product : Product) => product.quantity);
+        console.log("quantity", quantity)
+        const transaction = await getSchemaModel("transaction")!.create({...validatedData.data , userId : newUser._id, totalCost : totalCost , products : productsId , quantity : quantity});
         return new NextResponse(JSON.stringify(transaction), {
             status: 201,
             headers: { "Content-Type": "application/json" },
