@@ -10,6 +10,7 @@ import Link from "next/link";
 import React from 'react'
 import { useContext } from "react";
 import { CartContext } from "@/app/Context/CartContext";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 export default function ProductCard({product} : {product: Product}) {
     const cartContext = useContext(CartContext)
     const updateLength = cartContext!.updateLength ; 
@@ -26,8 +27,21 @@ export default function ProductCard({product} : {product: Product}) {
         />
       </div>
       <CardContent className="p-4 justify-between h-[calc(100%-224px)] flex-col flex">
-        <div>
-          <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
+
+        <div className="">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
+            <div className="flex items-center gap-4">
+              <p className="text-black/60 font-inter text-sm">UserName</p>
+              <Link href={"/"}>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>DJ</AvatarFallback>
+                </Avatar>
+              </Link>
+              </div>
+          </div>
+
            <div className="flex justify-between items-center"><p>{category.name}</p><p className="mb-2 text-sm text-dark200_light800">{subCategory.name}</p></div>
           <div className="flex justify-between items-center">
             <span className="text-lg font-bold text-green-600">${price.toLocaleString("fr-FR")}</span>
@@ -39,6 +53,7 @@ export default function ProductCard({product} : {product: Product}) {
             </div>
           </div>
         </div>
+
         <div className="flex justify-between items-center gap-2">
           <Link className={btnClassName +' btn-tertiary'} href={"/products/"+_id}>More Details
           <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
