@@ -1,14 +1,6 @@
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Store, ArrowLeft, Shirt, Car, Building, Package, Sofa } from "lucide-react";
-import {
-  getSchema
-} from "@/lib/validation";
-
-
-import {
-  getDefaultValues
-} from "@/constants/DefaultValues";
 
 import {
   Dialog,

@@ -50,8 +50,8 @@ const {data : session} = useSession()
     })
     if(res.ok){
       toast({
-        title : "Shop Created",
-        description : "Good job you created your own Shop"
+        title : "Product Created",
+        description : "Good job you created your own Product"
       })
     }else{
       toast({

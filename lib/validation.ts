@@ -122,7 +122,7 @@ export const schemas = {
   }),
   CommentSchema : z.object({
     content : z.string().min(2).max(500),
-    rating: z.number().min(0.5).max(5), 
+    rating: z.string().min(0.5).max(5), 
   }),
   ShippingSchema : z.object({
     "User Information": z.object({

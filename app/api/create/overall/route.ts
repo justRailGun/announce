@@ -27,10 +27,19 @@ export async function POST(request: Request) {
 
         // Création du produit
         const ProductModel =  getSchemaModel(getCategoryName.name);
-        const newUser = await User.find({email  : usermail}).lean();
-
-        console.log("User :", newUser[0]._id);
-        const newProduct = await ProductModel!.create({...validatedData.data , user : newUser[0]._id});
+        const newUser  = await User.findOne({email  : usermail});
+        if(!newUser){
+            return NextResponse.json(
+                { success: false, errors: "User not found" },
+                { status: 400 }
+            );
+        }
+        console.log("User :", newUser._id);
+        const newProduct = await ProductModel!.create({...validatedData.data , user : newUser._id});
+        
+        // Ajout de l'ID du produit au tableau "products" de l'utilisateur
+        newUser.products.push(newProduct._id); // Ajout en mémoire
+        await newUser.save(); // Sauvegarde en base de données
         console.log("Product created:", newProduct); // Debug
 
         return NextResponse.json({ success: true, data: newProduct }, { status: 201 });
