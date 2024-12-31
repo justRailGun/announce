@@ -1,6 +1,8 @@
 import ProductCard from '@/components/products/ProductCard'
 import { Product } from '@/constants/product'
 import React from 'react'
+
+import CommentCard from '@/components/products/CommentCard'
 interface Comment {
   _id: string;
   content: string;
@@ -14,6 +16,19 @@ const page = async ({params} : {params : Promise<{ id : string }>}) => {
     console.log('data :', data) 
     const products = data.data.user.products
     const comments = data.data.comments
+    console.log('comments :', comments)
+
+    function getReviewNote(rating) {
+      const notes = {
+        1: 'Terrible',
+        2: 'Poor',
+        3: 'Average',
+        4: 'Good',
+        5: 'Excellent',
+      };
+      return notes[rating] || 'No Rating';
+    }
+    
   return (
   <main className="max-xl:pt-24 pt-24 container mx-auto flex flex-col gap-4">
     <h1 className='text-3xl mt-8'>User Product</h1>
@@ -24,9 +39,16 @@ const page = async ({params} : {params : Promise<{ id : string }>}) => {
     </div>
      <div>
       <h1 className='text-3xl mt-8'>User Review</h1>
-      <div>
+      <div className='grid grid-cols-4 gap-4'>
         {comments.map((comment : Comment)=>{
-          return <p key={comment._id}>{comment.content}</p>
+          return <CommentCard 
+                    key={comment._id} 
+                    productImage={comment.product.image} 
+                    productName={comment.product.name} 
+                    productCategory={comment.product.category.name} 
+                    rating={comment.rating} comment={comment.content} 
+                    reviewNote={getReviewNote(comment.rating)} 
+                  />
         })}
       </div>
      </div>

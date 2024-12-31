@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import {ModeToggle} from "@/components/Theme"
 import Link from 'next/link'
 import {ROUTES} from '@/constants/route'
@@ -15,10 +15,29 @@ import ProductModal from '../ModalProduct'
 import { Badge } from '../ui/badge'
 import { CartContext } from '@/app/Context/CartContext'
 import { useContext } from 'react'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+interface User {
+  _id: string;  
+  name: string;
+  email: string;
+  image: string;
+  products: string[];
+  role : "admin" | "user"
+}
 const  Navbar =  () => {
   const {data:session} = useSession()
+  const [user, setUser] = React.useState<User | null>(null)
   const cartContext = useContext(CartContext)
   const cart = cartContext ? cartContext.cart : []
+  useEffect(() => {
+    const getUser = async ()=>{
+      const res = await fetch(`/api/user/email/${session?.user?.email}`)
+      const data = await res.json()
+      setUser(data.data)
+    }
+    if(session) getUser()
+  }, [session])
+console.log(user)
   return (
     <nav
     className='w-full flex z-50 fixed items-center justify-between background-light900_dark200 p-6  text-dark100_light900 dark:shadow-none'
@@ -46,7 +65,17 @@ const  Navbar =  () => {
                   <Badge className="absolute -top-2 -right-2 px-2 py-1 text-xs font-bold text-white rounded-full dark:bg-red-700 dark:text-white ">
                 {cart.length}
               </Badge>
-                </Link><ModeToggle />
+                </Link>
+                {user?._id && (
+  <Link href={`/user/${user._id}`}>
+    <Avatar>
+      <AvatarImage src={session?.user?.image} />
+      <AvatarFallback>DJ</AvatarFallback>
+    </Avatar>
+  </Link>
+)}
+
+                <ModeToggle />
                           
                 <SheetMenu trigger={<Image src="/icons/hamburger.svg" className='invert-colors' width={32} height={32} alt="hamburger" />} />
               
