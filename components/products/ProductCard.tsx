@@ -28,8 +28,8 @@ export default function ProductCard({product , creator} : {product : Product , c
     const updateLength = cartContext!.updateLength ; 
     const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory } = product;
     const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium dark:text-white'
-    const btnDeleteClass ="bg-red-500 dark:bg-red-600 hover:dark:bg-red-700"
-    const btnEditClass ="bg-blue-500 dark:bg-blue-600 hover:dark:bg-blue-700"
+    const btnDeleteClass =" bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+    const btnEditClass =" bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
     const { data: session } = useSession();
   return (
     <Card className="w-[350px]  min-h-[400px] overflow-hidden transition-all duration-300 hover:shadow-lg">
@@ -72,11 +72,11 @@ export default function ProductCard({product , creator} : {product : Product , c
           <div className="flex justify-between items-center gap-2">
           <Button className={btnClassName +btnEditClass}>
             Edit Product
-          <Edit className='w-5 h-5 text-blue-500 dark:text-white' onClick={()=>{}}/>
+          <Edit className='w-5 h-5 dark:text-white' onClick={()=>{}}/>
           </Button>
           <Button className={btnClassName + btnDeleteClass} onClick={() => {updateLength(_id);}}>
             Delete Product 
-            <Trash2 className='w-5 h-5 text-red-500 dark:text-white' onClick={()=>{}}/></Button>
+            <Trash2 className='w-5 h-5  dark:text-white' onClick={()=>{}}/></Button>
         </div>
         :
           <div className="flex justify-between items-center gap-2">
