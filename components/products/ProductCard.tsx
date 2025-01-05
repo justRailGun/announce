@@ -11,12 +11,26 @@ import React from 'react'
 import { useContext } from "react";
 import { CartContext } from "@/app/Context/CartContext";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-export default function ProductCard({product} : {product: Product}) {
+import { useSession } from "next-auth/react";
+import { Button } from "../ui/button";
+import { Edit, Trash2 } from 'lucide-react'
+
+interface Creator {
+  _id: string;
+  name: string;
+  email: string;
+  image: string;
+  role : "admin" | "user"
+  products: Product[];
+}
+export default function ProductCard({product , creator} : {product : Product , creator? : Creator | null}) {
     const cartContext = useContext(CartContext)
     const updateLength = cartContext!.updateLength ; 
-    const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory} = product;
-    const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium'
-
+    const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory } = product;
+    const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium dark:text-white'
+    const btnDeleteClass ="bg-red-500 dark:bg-red-600 hover:dark:bg-red-700"
+    const btnEditClass ="bg-blue-500 dark:bg-blue-600 hover:dark:bg-blue-700"
+    const { data: session } = useSession();
   return (
     <Card className="w-[350px]  min-h-[400px] overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className=" h-56 overflow-hidden">
@@ -32,11 +46,11 @@ export default function ProductCard({product} : {product: Product}) {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
             <div className="flex items-center gap-4">
-              <p className="text-black/60 font-inter text-sm">UserName</p>
+              <p className="text-black/60 font-inter text-sm">{creator?.name}</p>
               <Link href={"/"}>
                 <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" />
-                  <AvatarFallback>DJ</AvatarFallback>
+                  <AvatarImage src={creator?.image} />
+                  <AvatarFallback>{creator?.name}</AvatarFallback>
                 </Avatar>
               </Link>
               </div>
@@ -54,13 +68,24 @@ export default function ProductCard({product} : {product: Product}) {
           </div>
         </div>
 
-        <div className="flex justify-between items-center gap-2">
+        { creator?.email === session?.user?.email ?
+          <div className="flex justify-between items-center gap-2">
+          <Button className={btnClassName +btnEditClass}>
+            Edit Product
+          <Edit className='w-5 h-5 text-blue-500 dark:text-white' onClick={()=>{}}/>
+          </Button>
+          <Button className={btnClassName + btnDeleteClass} onClick={() => {updateLength(_id);}}>
+            Delete Product 
+            <Trash2 className='w-5 h-5 text-red-500 dark:text-white' onClick={()=>{}}/></Button>
+        </div>
+        :
+          <div className="flex justify-between items-center gap-2">
           <Link className={btnClassName +' btn-tertiary'} href={"/products/"+_id}>More Details
           <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
           </Link>
           <button className={btnClassName +" btn-secondary"} onClick={() => {updateLength(_id);}}>
             Add to Cart <Image src="/icons/cart.svg" className='invert-colors' width={20} height={20} alt="cart" /></button>
-        </div>
+        </div>  }
       </CardContent>
     </Card>
   )

@@ -26,6 +26,7 @@ export {
 
 export const getSchemaModel = (value : string) =>{
     switch (value.toLowerCase().replaceAll(" ", "")) {
+        case 'baseproduct' : return BaseProduct
         case "categoryschema" : return Category
         case "subcategoryschema" : return SubCategory
         case "comment" : return Comment

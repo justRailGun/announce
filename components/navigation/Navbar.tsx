@@ -37,7 +37,7 @@ const  Navbar =  () => {
     }
     if(session) getUser()
   }, [session])
-console.log(user)
+console.log(session)
   return (
     <nav
     className='w-full flex z-50 fixed items-center justify-between background-light900_dark200 p-6  text-dark100_light900 dark:shadow-none'
@@ -69,7 +69,7 @@ console.log(user)
                 {user?._id && (
   <Link href={`/user/${user._id}`}>
     <Avatar>
-      <AvatarImage src={session?.user?.image} />
+      <AvatarImage src={user?.image} />
       <AvatarFallback>DJ</AvatarFallback>
     </Avatar>
   </Link>

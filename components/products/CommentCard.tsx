@@ -1,7 +1,10 @@
+'use client'
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star } from 'lucide-react'
+import { Star , Edit, Delete } from 'lucide-react'
 import Image from "next/image"
+import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
 type ReviewNote = "Excellent" | "Good" | "Average" | "Poor" | "Terrible"
 
@@ -12,9 +15,11 @@ interface CommentCardProps {
   rating: number
   comment: string
   reviewNote: ReviewNote
+  creator? : string
 }
 
-const getReviewNoteColor = (note: ReviewNote): string => {
+const getReviewNoteColor =  (note: ReviewNote): string => {
+ 
   switch (note) {
     case "Excellent": return "bg-green-500 hover:bg-green-600"
     case "Good": return "bg-blue-500 hover:bg-blue-600"
@@ -23,6 +28,14 @@ const getReviewNoteColor = (note: ReviewNote): string => {
     case "Terrible": return "bg-red-500 hover:bg-red-600"
   }
 }
+interface User {
+  _id: string;  
+  name: string;
+  email: string;
+  image: string;
+  products: string[];
+  role : "admin" | "user"
+}
 
 export default function CommentCard({
   productImage,
@@ -30,8 +43,23 @@ export default function CommentCard({
   productCategory,
   rating,
   comment,
-  reviewNote
-}: CommentCardProps) {
+  reviewNote, 
+  creator,
+}:  CommentCardProps) {
+  const {data : session} = useSession()
+  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  useEffect(()=>{
+    const getUser= async ()=>{
+    
+      const res = await fetch(`http://localhost:3000/api/user/email/${session?.user?.email}`)
+      const data = await res.json()
+      setCurrentUser(data.data)
+    }
+   getUser()
+  }
+  ,[session])
+    
+
   return (
     <Card className="w-full max-w-2xl mx-auto">
       <CardContent className="p-6">
@@ -63,6 +91,10 @@ export default function CommentCard({
             <Badge className={`${getReviewNoteColor(reviewNote)} dark:${getReviewNoteColor(reviewNote)} dark:text-white`}>
               {reviewNote}
             </Badge>
+            {creator === currentUser?._id && <div className='flex gap-2'>
+              <Edit className='w-5 h-5 text-blue-500' onClick={()=>{}}/>
+              <Delete className='w-5 h-5 text-red-500' onClick={()=>{}}/>
+            </div>}
           </div>
         </div>
       </CardContent>

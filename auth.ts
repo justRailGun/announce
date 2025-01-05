@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import Github from "next-auth/providers/github"
 
+
 const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
@@ -15,6 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return token
       },
         async session({ session , token}) {
+          
           session.user.id = token.id as string
           return session
       },
