@@ -1,10 +1,11 @@
 'use client'
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Star , Edit, Delete } from 'lucide-react'
+import { Star , Edit, Trash2 } from 'lucide-react'
 import Image from "next/image"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
+import { Button } from "../ui/button"
 
 type ReviewNote = "Excellent" | "Good" | "Average" | "Poor" | "Terrible"
 
@@ -48,9 +49,12 @@ export default function CommentCard({
 }:  CommentCardProps) {
   const {data : session} = useSession()
   const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const btnClassName = 'w-full justify-between px-4 py-2 rounded-md flex items-center text-sm font-medium dark:text-white'
+  const btnDeleteClass =" bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700"
+  const btnEditClass =" bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+    
   useEffect(()=>{
     const getUser= async ()=>{
-    
       const res = await fetch(`http://localhost:3000/api/user/email/${session?.user?.email}`)
       const data = await res.json()
       setCurrentUser(data.data)
@@ -86,17 +90,25 @@ export default function CommentCard({
                   }`}
                 />
               ))}
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">{comment}</p>
-            <Badge className={`${getReviewNoteColor(reviewNote)} dark:${getReviewNoteColor(reviewNote)} dark:text-white`}>
+              <Badge className={`${getReviewNoteColor(reviewNote)} dark:${getReviewNoteColor(reviewNote)} dark:text-white`}>
               {reviewNote}
             </Badge>
-            {creator === currentUser?._id && <div className='flex gap-2'>
-              <Edit className='w-5 h-5 text-blue-500' onClick={()=>{}}/>
-              <Delete className='w-5 h-5 text-red-500' onClick={()=>{}}/>
-            </div>}
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">{comment}</p>
           </div>
         </div>
+        {creator === currentUser?._id &&
+            <div className='flex gap-2'>
+              <Button className={btnClassName +btnEditClass}>
+                Edit Comment
+                <Edit className='w-5 h-5 dark:text-white' onClick={()=>{}}/>
+              </Button>
+              <Button className={btnClassName + btnDeleteClass} >
+                 Delete Comment 
+                <Trash2 className='w-5 h-5  dark:text-white' onClick={()=>{}}/>
+              </Button>
+            </div>
+            }
       </CardContent>
     </Card>
   )

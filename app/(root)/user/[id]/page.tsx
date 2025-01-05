@@ -39,7 +39,7 @@ const page = async ({params} : {params : Promise<{ id : string }>}) => {
       })}
     </div>
      <div>
-      <h1 className='text-3xl mt-8'>User Review</h1>
+      <h1 className='text-3xl my-8'>User Review</h1>
       <div className='grid grid-cols-4 gap-4'>
         {comments.map((comment : Comment)=>{
           return <CommentCard 
