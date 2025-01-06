@@ -4,7 +4,7 @@ import "./globals.css";
 import  {ThemeProvider}  from "@/components/Theme"
 import {NuqsAdapter} from "nuqs/adapters/next/app";
 import { SessionProvider } from "next-auth/react";
-import { auth } from "@/auth";
+import { auth } from "@/app/auth";
 import { Toaster } from "@/components/ui/toaster"
 const Inter = localFont({
   src: "./fonts/InterFont.ttf",

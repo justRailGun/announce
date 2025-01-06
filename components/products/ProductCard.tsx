@@ -5,7 +5,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Product } from "@/constants/product";
 import Rating from '@mui/material/Rating';
-import Image from "next/image";
 import Link from "next/link";
 import React from 'react'
 import { useContext } from "react";
@@ -13,17 +12,10 @@ import { CartContext } from "@/app/Context/CartContext";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useSession } from "next-auth/react";
 import { Button } from "../ui/button";
-import { Edit, Trash2 } from 'lucide-react'
+import { Edit, Trash2, ShoppingCart , NotepadText} from 'lucide-react'
 
-interface Creator {
-  _id: string;
-  name: string;
-  email: string;
-  image: string;
-  role : "admin" | "user"
-  products: Product[];
-}
-export default function ProductCard({product , creator} : {product : Product , creator? : Creator | null}) {
+
+export default function ProductCard({product } : {product : Product}) {
     const cartContext = useContext(CartContext)
     const updateLength = cartContext!.updateLength ; 
     const {name,image,price,rating,numberOfRatings , _id, category,"Sub-Category" : subCategory } = product;
@@ -43,14 +35,14 @@ export default function ProductCard({product , creator} : {product : Product , c
       <CardContent className="p-4 justify-between h-[calc(100%-224px)] flex-col flex">
 
         <div className="">
-          <div className="flex justify-between items-center mb-4">
+          <div className="mb-4">
             <h2 className="text-xl font-semibold text-dark200_light800">{name}</h2>
-            <div className="flex items-center gap-4">
-              <p className="text-black/60 font-inter text-sm">{creator?.name}</p>
+            <div className="flex justify-between items-center gap-4">
+              <p className="text-black/60 font-inter text-sm dark:text-white/60">{product.user.name}</p>
               <Link href={"/"}>
                 <Avatar>
-                  <AvatarImage src={creator?.image} />
-                  <AvatarFallback>{creator?.name}</AvatarFallback>
+                  <AvatarImage src={product.user.image} />
+                  <AvatarFallback>{product.user.name.slice(0,1)}</AvatarFallback>
                 </Avatar>
               </Link>
               </div>
@@ -60,15 +52,15 @@ export default function ProductCard({product , creator} : {product : Product , c
           <div className="flex justify-between items-center">
             <span className="text-lg font-bold text-green-600">${price.toLocaleString("fr-FR")}</span>
             <div className="flex items-center">
-              <div className="flex items-center">
+              <div className="flex items-center my-2">
                 <Rating name="read-only" value={rating} readOnly precision={0.1}/>
               </div>
-              <span className="ml-2 text-sm text-gray-600">{rating} <span className="text-gray-400 small-regular">({numberOfRatings} reviews)</span></span>
+              <span className="ml-2 text-sm text-gray-600">{rating?.toFixed(1)} <span className="text-gray-400 small-regular">({numberOfRatings} reviews)</span></span>
             </div>
           </div>
         </div>
 
-        { creator?.email === session?.user?.email ?
+        { session?.user?.id === product.user._id ?
           <div className="flex justify-between items-center gap-2">
           <Button className={btnClassName +btnEditClass}>
             Edit Product
@@ -80,11 +72,11 @@ export default function ProductCard({product , creator} : {product : Product , c
         </div>
         :
           <div className="flex justify-between items-center gap-2">
-          <Link className={btnClassName +' btn-tertiary'} href={"/products/"+_id}>More Details
-          <Image src="/icons/detail.svg" className='invert-colors' width={20} height={20} alt="cart" />
+          <Link className={btnClassName + " text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700"} href={"/products/"+_id}>More Details
+          <NotepadText className='w-5 h-5 dark:text-white' onClick={()=>{}}/>
           </Link>
-          <button className={btnClassName +" btn-secondary"} onClick={() => {updateLength(_id);}}>
-            Add to Cart <Image src="/icons/cart.svg" className='invert-colors' width={20} height={20} alt="cart" /></button>
+          <Button className={btnClassName + " bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700"} onClick={() => {updateLength(_id);}}>
+            Add to Cart <ShoppingCart className='w-5 h-5 dark:text-white' onClick={()=>{}}/></Button>
         </div>  }
       </CardContent>
     </Card>

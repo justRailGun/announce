@@ -1,8 +1,8 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import Github from "next-auth/providers/github"
-
-
+import { getSchemaModel } from "../database";
+import dbConnect from "../lib/dbconnect";
 const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
@@ -15,9 +15,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         return token
       },
-        async session({ session , token}) {
-          
-          session.user.id = token.id as string
+        async session({ session }) {
+          await dbConnect()
+          const sessionUser = await getSchemaModel('userschema')!.findOne({email : session.user.email})
+          session.user.id = sessionUser._id.toString()
           return session
       },
         async signIn({ user }) {

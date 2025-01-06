@@ -6,7 +6,7 @@ export async function GET() {
     try {
       await dbConnect();
   
-      const product = await BaseProduct.find().populate(['category', 'Sub-Category']);
+      const product = await BaseProduct.find().populate(['category', 'Sub-Category', 'user']);
 
       return NextResponse.json({ success: true, data:product});
     } catch (error) {     

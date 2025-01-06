@@ -159,7 +159,7 @@ setSchema(getSchema(selectedCategory as "SignInSchema" | "SignUpSchema" | "ShopS
             <DialogDescription>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                <span  className="grid grid-cols-2 gap-4 mt-8">
+                <span className="grid grid-cols-2 gap-4 mt-8">
                 {Object.keys(isDefaultValues).map((item,index)=>{
                     return (
                         <>
